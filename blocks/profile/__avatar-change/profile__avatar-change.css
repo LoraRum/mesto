@@ -1,0 +1,12 @@
+.profile__avatar-change {
+    outline: none;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    border: none;
+    margin: 0;
+}
+
+

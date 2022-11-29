@@ -1,0 +1,12 @@
+.group__like {
+    all: unset;
+    background-image: url(../../../images/like.svg);
+    text-decoration: none;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 22px 19px;
+    background-position: center;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+}
