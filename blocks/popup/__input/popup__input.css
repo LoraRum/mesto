@@ -8,4 +8,6 @@
     margin: 0;
     font-size: 14px;
     line-height: 17px;
+    display: flex;
+    flex-direction: column;
 }

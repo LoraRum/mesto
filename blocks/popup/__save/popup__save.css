@@ -3,7 +3,8 @@
     text-decoration: none;
     background-color: transparent;
     cursor: pointer;
-    width: 238px;
+    min-width: 238px;
+    max-width: 358px;
     height: 46px;
     background-color: #000000;
     border-radius: 2px;
@@ -11,7 +12,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    /* margin-bottom: 25px; */
+    font-family: 'Inter', Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    /* margin: 0 auto; */
 }
 .popup__save:hover {
     opacity: 0.8;

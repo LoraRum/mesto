@@ -1,5 +1,20 @@
 .popup {
-    margin: 0 19px;
-    padding-top: 0;
-    position: relative;
+    all: unset;
+    width: calc(100% - 38px);
+    max-width: 430px;
+    min-width: 282px;
+    margin: 0;
+    padding: 0;
+    left: 50%;
+    top: 0;
+    position: fixed;
+    transform: translate(-50%, 123px);
+    display: none;
+}
+
+@media screen and (min-width: 768px ){
+    .popup {
+        transform: translate(-50%, 195px);
+    }  
+
 }
