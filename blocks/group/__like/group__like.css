@@ -10,3 +10,7 @@
     width: 32px;
     height: 32px;
 }
+
+.group__like:hover {
+    opacity: 0.8;
+}
