@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="pages/index.css">
     <title>Mesto Russia</title>
-    <script async src="js/script.js"></script>
+    <script async src="js/js/script.js"></script>
 </head>
 
 <body class="body">
@@ -14,7 +15,7 @@
             <img class="header__logo" src="images/logo.svg" alt="Логотип место">
         </header>
 
-  
+
 
         <main>
             <section class="profile">
@@ -30,7 +31,7 @@
                         <p class="profile__subtitle">Исследователь океана</p>
                     </div>
                 </div>
-                
+
                 <button class="profile__add-button"></button>
             </section>
             <section class="groups" aria-label="Галерея фотографий">
@@ -81,23 +82,22 @@
         <footer class="footer">
             <p class="footer__copyright">© 2020 Mesto Russia</p>
         </footer>
-       
-        <dialog class="popup">
-            <button class="popup__close"></button>
-            <div class="popup__box">
+
+        <div class="popup">
+            <div class="popup__container">
+                <button class="popup__close"></button>
                 <h2 class="popup__title">Редактировать профиль</h2>
                 <form class="popup__form">
                     <fieldset class="popup__input">
-                        <input type= text class="popup__input_type-name" placeholder="Имя" name="name" id="name-input">
-                        <div class="popup__line"></div>
-                        <input type= text class="popup__input_type-about" placeholder="О себе" name="about" id="about-input">
-                        <div class="popup__line"></div>
+                        <input type=text class="popup__input_type-name" placeholder="Имя" name="name" id="name-input">
+                        <input type=text class="popup__input_type-about" placeholder="О себе" name="about"
+                            id="about-input">
                     </fieldset>
                     <button class="popup__save">Сохранить</button>
                 </form>
             </div>
-                
-        </dialog>
-</div>
+        </div>
+    </div>
 </body>
+
 </html>

@@ -10,13 +10,21 @@
     background-size: cover;
     width: 20px;
     height: 20px;
-    /* margin: 0 0 16px 260px; */
     cursor: pointer;
     position: absolute;
-    right: 0px;
-    top: -32px;
+    top: -25px;
+    right: 0;
 }
 
 .popup__close:hover {
     opacity: 0.8;
+}
+
+@media screen and (min-width: 768px) {
+.popup__close {
+    width: 32px;
+    height: 32px;
+    top: -40px;
+    right: -40px;
+} 
 }

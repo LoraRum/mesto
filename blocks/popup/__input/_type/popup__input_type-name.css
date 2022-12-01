@@ -1,5 +1,5 @@
 .popup__input_type-name {
     all: unset;
     padding-bottom: 13px;
-
+    border-bottom: 1px solid rgb(0 0 0 / 20%);
 }

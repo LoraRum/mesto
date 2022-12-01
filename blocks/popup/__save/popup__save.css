@@ -3,8 +3,6 @@
     text-decoration: none;
     background-color: transparent;
     cursor: pointer;
-    min-width: 238px;
-    max-width: 358px;
     height: 46px;
     background-color: #000000;
     border-radius: 2px;
@@ -17,8 +15,14 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
-    /* margin: 0 auto; */
 }
 .popup__save:hover {
     opacity: 0.8;
 }
+
+@media screen and (min-width: 768px) {
+    .popup__save {
+        font-size: 18px;
+        line-height: 22px;
+    } 
+    }
