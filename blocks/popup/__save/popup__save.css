@@ -1,7 +1,6 @@
 .popup__save{
     all: unset;
     text-decoration: none;
-    background-color: transparent;
     cursor: pointer;
     height: 46px;
     background-color: #000000;
