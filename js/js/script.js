@@ -33,8 +33,8 @@ popupContainer.addEventListener('click', function (event) {
 let formElement = document.querySelector('.popup__form');
 
 // Находим поля формы в DOM
-let nameInput = formElement.querySelector('.popup__input_type-name');
-let jobInput = formElement.querySelector('.popup__input_type-about');
+let nameInput = formElement.querySelector('.popup__input-name');
+let jobInput = formElement.querySelector('.popup__input-about');
 
 let name = document.querySelector('.profile__title');
 let about = document.querySelector('.profile__subtitle');
