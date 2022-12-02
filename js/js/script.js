@@ -39,13 +39,15 @@ let jobInput = formElement.querySelector('.popup__input_type-about');
 let name = document.querySelector('.profile__title');
 let about = document.querySelector('.profile__subtitle');
 
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+// Обработчик «отправки» формы
 
 function handleFormSubmit(event) {
     event.preventDefault();
     name.textContent = nameInput.value;
     about.textContent = jobInput.value;
+
+    nameInput.value = name.textContent;
+    jobInput.value = about.textContent;
 
     closePopup();
 }

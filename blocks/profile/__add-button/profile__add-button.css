@@ -30,8 +30,8 @@
     }
     }
 
-    @media screen and (min-width: 1280px) {
-        .profile__add-button{
-            margin-left: 250px;
-        }
-        }
+@media screen and (min-width: 1280px) {
+    .profile__add-button{
+        margin-left: 250px;
+    }
+}

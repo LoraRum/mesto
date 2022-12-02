@@ -1,9 +1,8 @@
 .groups {
     padding-top: 36px;
     gap: 20px;
-    margin: 0px 19px;
+    margin: 0 19px;
     display: grid;
-    grid-template-columns: repeat(auto-fit,282px);
     justify-content: center;
     grid-template-columns: repeat(auto-fit,minmax(282px, 1fr));
 }
