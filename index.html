@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="pages/index.css">
     <title>Mesto Russia</title>
-    <script async src="js/js/script.js"></script>
+
 </head>
 
 <body class="body">
@@ -19,83 +19,84 @@
     <main>
         <section class="profile">
             <div class="profile__about">
-                <button class="profile__avatar-change">
+                <button type="submit" class="profile__avatar-change">
                     <img class="profile__avatar" src="images/image.jpg" alt="Аватар">
                 </button>
                 <div class="profile__date">
                     <div class="profile__info">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <button class="profile__edit-button"></button>
+                        <button type="submit" class="profile__edit-button"></button>
                     </div>
                     <p class="profile__subtitle">Исследователь океана</p>
                 </div>
             </div>
 
-            <button class="profile__add-button"></button>
+            <button type="submit" class="profile__add-button"></button>
         </section>
         <section class="groups" aria-label="Галерея фотографий">
             <div class="group">
                 <img class="group__image" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск">
                 <div class="group__box">
-                    <p class="group__text">Карачаевск</p>
-                    <button class="group__like"></button>
+                    <h2 class="group__text">Карачаевск</h2>
+                    <button type="submit" class="group__like"></button>
                 </div>
             </div>
             <div class="group">
                 <img class="group__image" src="images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус">
                 <div class="group__box">
-                    <p class="group__text">Гора Эльбрус</p>
-                    <button class="group__like"></button>
+                    <h2 class="group__text">Гора Эльбрус</h2>
+                    <button type="submit" class="group__like"></button>
                 </div>
             </div>
             <div class="group">
                 <img class="group__image" src="images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай">
                 <div class="group__box">
-                    <p class="group__text">Домбай</p>
-                    <button class="group__like"></button>
+                    <h2 class="group__text">Домбай</h2>
+                    <button type="submit" class="group__like"></button>
                 </div>
             </div>
             <div class="group">
                 <img class="group__image" src="images/kirill-pershin-1088404-unsplash.jpg" alt="Карачаевск">
                 <div class="group__box">
-                    <p class="group__text">Карачаевск</p>
-                    <button class="group__like"></button>
+                    <h2 class="group__text">Карачаевск</h2>
+                    <button type="submit" class="group__like"></button>
                 </div>
             </div>
             <div class="group">
                 <img class="group__image" src="images/kirill-pershin-1404681-unsplash.jpg" alt="Гора Эльбрус">
                 <div class="group__box">
-                    <p class="group__text">Гора Эльбрус</p>
-                    <button class="group__like"></button>
+                    <h2 class="group__text">Гора Эльбрус</h2>
+                    <button type="submit" class="group__like"></button>
                 </div>
             </div>
             <div class="group">
                 <img class="group__image" src="images/kirill-pershin-1556355-unsplash.jpg" alt="Домбай">
                 <div class="group__box">
-                    <p class="group__text">Домбай</p>
-                    <button class="group__like"></button>
+                    <h2 class="group__text">Домбай</h2>
+                    <button type="submit" class="group__like"></button>
                 </div>
             </div>
         </section>
     </main>
     <footer class="footer">
-        <p class="footer__copyright">© 2020 Mesto Russia</p>
+        <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
 
     <div class="popup">
         <div class="popup__container">
-            <button class="popup__close"></button>
+            <button type="submit" class="popup__close"></button>
             <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form" >
-                <fieldset class="popup__input">
-                    <input type=text class="popup__input-name" placeholder="Имя">
-                    <input type=text class="popup__input-about" placeholder="О себе">
+            <form class="popup__form">
+                <fieldset class="popup__user-info">
+                    <input type=text class="input input_tape_name" placeholder="Имя">
+                    <input type=text class="input input_tape_about" placeholder="О себе">
                 </fieldset>
                 <button type="submit" class="popup__save">Сохранить</button>
             </form>
         </div>
     </div>
-</div>
-</body>
 
+</div>
+<script src="scripts/index.js"></script>
+</body>
 </html>

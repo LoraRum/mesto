@@ -2,7 +2,7 @@
     all: unset;
     text-decoration: none;
     cursor: pointer;
-    height: 46px;
+    height: 45px;
     background-color: #000000;
     border-radius: 2px;
     color: white;
@@ -23,5 +23,6 @@
     .popup__save {
         font-size: 18px;
         line-height: 22px;
-    } 
+        height: 50px;
     }
+}
