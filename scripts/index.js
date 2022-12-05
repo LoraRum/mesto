@@ -33,7 +33,7 @@ function openPopup() {
 }
 
 function closePopup() {
-    popup.classList.remove('popup__opened');
+    popup.classList.remove('popup_opened');
 }
 
 // Обработчик «отправки» формы
