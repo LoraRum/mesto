@@ -1,4 +1,4 @@
-.popup__save{
+.popup__save {
     all: unset;
     text-decoration: none;
     cursor: pointer;
@@ -15,6 +15,7 @@
     font-size: 14px;
     line-height: 17px;
 }
+
 .popup__save:hover {
     opacity: 0.8;
 }

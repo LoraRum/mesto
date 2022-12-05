@@ -7,8 +7,8 @@ const popupSave = document.querySelector('.popup__save');
 let formElement = document.querySelector('.popup__form');
 
 // Находим поля формы в DOM
-let nameInput = formElement.querySelector('.input_tape_name');
-let jobInput = formElement.querySelector('.input_tape_about');
+let nameInput = formElement.querySelector('.input_type_name');
+let jobInput = formElement.querySelector('.input_type_about');
 
 let name = document.querySelector('.profile__title');
 let about = document.querySelector('.profile__subtitle');
@@ -27,7 +27,7 @@ popupContainer.addEventListener('click', function (event) {
 formElement.addEventListener('submit', handleFormSubmit);
 
 function openPopup() {
-    popup.classList.add('popup__opened');
+    popup.classList.add('popup_opened');
     nameInput.value = name.textContent;
     jobInput.value = about.textContent;
 }

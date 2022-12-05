@@ -1,11 +1,11 @@
-.profile__date{
+.profile__date {
     display: flex;
     flex-direction: column;
     margin: 22px 38px 0 65px;
 }
 
 @media screen and (min-width: 768px) {
-    .profile__date{
+    .profile__date {
         margin: 0;
         align-items: flex-start;
     }

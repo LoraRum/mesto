@@ -6,7 +6,7 @@
 }
 
 @media screen and (min-width: 768px) {
-    .profile__info{
+    .profile__info {
         gap: 25px;
     }
 }

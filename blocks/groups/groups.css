@@ -4,14 +4,14 @@
     margin: 0 19px;
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(auto-fit,minmax(282px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(282px, 1fr));
 }
 
 @media screen and (min-width: 1024px) {
-    .groups{
+    .groups {
         padding-top: 47px;
         gap: 20px 17px;
         margin-left: 200px;
         margin-right: 200px;
-    } 
+    }
 }
