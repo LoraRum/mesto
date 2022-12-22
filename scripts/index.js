@@ -45,49 +45,42 @@ function handleFormSubmit(event) {
     closePopup();
 }
 
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-        like: false,
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-        like: false,
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-        like: false,
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-        like: false,
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-        like: false,
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-        like: false,
-    }
-];
+const initialCards = [{
+    name: 'Архыз', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg', like: false,
+}, {
+    name: 'Челябинская область',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+    like: false,
+}, {
+    name: 'Иваново',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+    like: false,
+}, {
+    name: 'Камчатка',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+    like: false,
+}, {
+    name: 'Холмогорский район',
+    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+    like: false,
+}, {
+    name: 'Байкал', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg', like: false,
+}];
 
 const cardTemplate = document.querySelector('#card-template');
 const card = cardTemplate.content.cloneNode(true);
 
-initialCards.forEach(function (element) {
-    const card = cardTemplate.content.cloneNode(true);
-    card.querySelector('.group__text').textContent = element.name;
-    card.querySelector('.group__image').src = element.link;
-    document.querySelector('.groups').appendChild(card);
+initialCards.forEach(function (card) {
+    const cardElement = cardTemplate.content.cloneNode(true);
+    cardElement.querySelector('.group__text').textContent = card.name;
+    cardElement.querySelector('.group__image').src = card.link;
 
-    })
+    if (card.like === true) {
+        cardElement.querySelector('.group__like').classList.add('group__like_active');
+    }
+
+    document.querySelector('.groups').appendChild(cardElement);
+})
 card.querySelector('.group__like').addEventListener('click', function (evt) {
     evt.target.classList.toggle('.group__like_active');
 })
