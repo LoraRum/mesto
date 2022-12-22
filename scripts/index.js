@@ -3,6 +3,7 @@ const popup = document.querySelector('.popup');
 const popupClose = document.querySelector('.popup__close');
 const popupContainer = document.querySelector('.popup__container');
 const popupSave = document.querySelector('.popup__save');
+const popupNewCard = document.querySelector('.profile__add-button')
 // Находим форму в DOM
 let formElement = document.querySelector('.popup__form');
 
@@ -43,3 +44,52 @@ function handleFormSubmit(event) {
     about.textContent = jobInput.value;
     closePopup();
 }
+
+const initialCards = [
+    {
+        name: 'Архыз',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+        like: false,
+    },
+    {
+        name: 'Челябинская область',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+        like: false,
+    },
+    {
+        name: 'Иваново',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+        like: false,
+    },
+    {
+        name: 'Камчатка',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+        like: false,
+    },
+    {
+        name: 'Холмогорский район',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+        like: false,
+    },
+    {
+        name: 'Байкал',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+        like: false,
+    }
+];
+
+const cardTemplate = document.querySelector('#card-template');
+const card = cardTemplate.content.cloneNode(true);
+
+initialCards.forEach(function (element) {
+    const card = cardTemplate.content.cloneNode(true);
+    card.querySelector('.group__text').textContent = element.name;
+    card.querySelector('.group__image').src = element.link;
+    document.querySelector('.groups').appendChild(card);
+
+    })
+card.querySelector('.group__like').addEventListener('click', function (evt) {
+    evt.target.classList.toggle('.group__like_active');
+})
+
+
