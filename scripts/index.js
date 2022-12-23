@@ -67,21 +67,34 @@ const initialCards = [{
     name: 'Байкал', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg', like: false,
 }];
 
-const cardTemplate = document.querySelector('#card-template');
+function renderCard(cardData) {
+    const cardTemplate = document.querySelector('#card-template').content;
+    const cardElement = cardTemplate.querySelector('.group').cloneNode(true);
+    cardElement.querySelector('.group__text').textContent = cardData.name;
+    cardElement.querySelector('.group__image').src = cardData.link;
 
-
-function renderCard(card) {
-    const cardElement = cardTemplate.content.cloneNode(true);
-    cardElement.querySelector('.group__text').textContent = card.name;
-    cardElement.querySelector('.group__image').src = card.link;
-
-    if (card.like === true) {
+    if (cardData.like === true) {
         cardElement.querySelector('.group__like').classList.add('group__like_active');
     }
-    return
+
+    cardElement.querySelector('.group__remove').addEventListener('click', function () {
+        cardElement.remove();
+    })
+
+    cardElement.querySelector('.group__like').addEventListener("click", function () {
+        cardElement.querySelector('.group__like').classList.toggle('group__like_active');
+    })
+
+    return cardElement;
 }
-document.querySelector('.groups').appendChild(cardElement);
-initialCards.forEach(renderCard)
+
+initialCards.forEach(function (cardData) {
+    const cardElement = renderCard(cardData);
+    document.querySelector('.groups').appendChild(cardElement);
+})
+
+
+const removeCardButton = document.querySelector('.group__remove');
 
 
 
