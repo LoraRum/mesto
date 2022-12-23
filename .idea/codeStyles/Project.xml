@@ -3,6 +3,9 @@
     <HTMLCodeStyleSettings>
       <option name="HTML_ENFORCE_QUOTES" value="true" />
     </HTMLCodeStyleSettings>
+    <JSCodeStyleSettings version="0">
+      <option name="FORCE_SEMICOLON_STYLE" value="true" />
+    </JSCodeStyleSettings>
     <codeStyleSettings language="JavaScript">
       <option name="KEEP_LINE_BREAKS" value="false" />
     </codeStyleSettings>

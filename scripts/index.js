@@ -1,6 +1,9 @@
 const profileButton = document.querySelector('.profile__edit-button');
-const popup = document.querySelector('.popup');
+const popupUser = document.querySelector('.popup_kind_new-user');
+const popupCard = document.querySelector('.popup_kind_new-card');
 const popupClose = document.querySelector('.popup__close');
+const popupCloseCard = document.querySelector('.popup_kind_close-card');
+const popup = document.querySelector('.popup')
 const popupContainer = document.querySelector('.popup__container');
 const popupSave = document.querySelector('.popup__save');
 const popupNewCard = document.querySelector('.profile__add-button')
@@ -14,10 +17,14 @@ let jobInput = formElement.querySelector('.input_type_about');
 let name = document.querySelector('.profile__title');
 let about = document.querySelector('.profile__subtitle');
 
+
+
 //Открыть попап
-profileButton.addEventListener('click', openPopup)
+profileButton.addEventListener('click', openPopupUser)
+popupNewCard.addEventListener('click', openPopupCard)
 //Закрыть попап
 popupClose.addEventListener('click', closePopup)
+popupCloseCard.addEventListener('click', closePopupCard)
 //Закрыть попап нажатием на экран
 popup.addEventListener('click', function (event) {
     closePopup();
@@ -27,13 +34,23 @@ popupContainer.addEventListener('click', function (event) {
 });
 formElement.addEventListener('submit', handleFormSubmit);
 
-function openPopup() {
-    popup.classList.add('popup_opened');
+function openPopupUser() {
+    popupUser.classList.add('popup_opened');
+    nameInput.value = name.textContent;
+    jobInput.value = about.textContent;
+}
+
+function openPopupCard() {
+    popupCard.classList.add('popup_opened');
     nameInput.value = name.textContent;
     jobInput.value = about.textContent;
 }
 
 function closePopup() {
+    popup.classList.remove('popup_opened');
+}
+
+function closePopupCard() {
     popup.classList.remove('popup_opened');
 }
 
@@ -95,6 +112,3 @@ initialCards.forEach(function (cardData) {
 
 
 const removeCardButton = document.querySelector('.group__remove');
-
-
-
