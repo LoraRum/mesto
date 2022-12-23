@@ -1,5 +1,5 @@
 .profile__edit-button {
-    background-image: url(../../../images/Edit\ Button.svg);
+    background-image: url(../../../images/Edit-Button.svg);
     outline: none;
     display: inline-block;
     text-align: center;
@@ -14,7 +14,7 @@
 }
 
 .profile__edit-button:hover {
-    opacity: 0.8;
+    opacity: 0.6;
 }
 
 @media screen and (min-width: 1024px) {

@@ -68,7 +68,7 @@ const initialCards = [{
 }];
 
 const cardTemplate = document.querySelector('#card-template');
-const card = cardTemplate.content.cloneNode(true);
+
 
 initialCards.forEach(function (card) {
     const cardElement = cardTemplate.content.cloneNode(true);
