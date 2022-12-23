@@ -70,7 +70,7 @@ const initialCards = [{
 const cardTemplate = document.querySelector('#card-template');
 
 
-initialCards.forEach(function (card) {
+function renderCard(card) {
     const cardElement = cardTemplate.content.cloneNode(true);
     cardElement.querySelector('.group__text').textContent = card.name;
     cardElement.querySelector('.group__image').src = card.link;
@@ -78,11 +78,10 @@ initialCards.forEach(function (card) {
     if (card.like === true) {
         cardElement.querySelector('.group__like').classList.add('group__like_active');
     }
+    return
+}
+document.querySelector('.groups').appendChild(cardElement);
+initialCards.forEach(renderCard)
 
-    document.querySelector('.groups').appendChild(cardElement);
-})
-card.querySelector('.group__like').addEventListener('click', function (evt) {
-    evt.target.classList.toggle('.group__like_active');
-})
 
 

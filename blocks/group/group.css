@@ -4,4 +4,8 @@
     margin: 0;
     overflow: hidden;
     position: relative;
+    display: grid;
+    grid-template-rows: 282px 1fr;
+    max-width: 100%;
 }
+
