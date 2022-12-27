@@ -37,8 +37,9 @@
     <footer class="footer">
         <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
+
     <template id="card-template">
-        <div class="group">
+        <div class="group card">
             <img class="group__image" src="" alt="">
             <div class="group__box">
                 <h2 class="group__text"></h2>
@@ -48,35 +49,41 @@
         </div>
     </template>
 
-    <div class="popup popup_kind_new-user">
-        <div class="popup__container">
-            <button type="button" class="popup__close popup_kind_close-user"></button>
-            <h2 class="popup__title">Редактировать профиль</h2>
-            <form class="popup__form">
-                <fieldset class="popup__user-info">
+    <template id="popup-template">
+        <div class="popup">
+            <div class="popup__container">
+                <button type="button" class="popup__close"></button>
+                <div class="popup__content">
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <template id="edit-user-form-template">
+        <div class="card card_with-shadow form">
+            <h2 class="form__title">Редактировать профиль</h2>
+            <form class="form__form">
+                <fieldset class="form__user-info">
                     <input type="text" class="input input_type_name" placeholder="Имя">
                     <input type="text" class="input input_type_about" placeholder="О себе">
                 </fieldset>
-                <button type="submit" class="popup__save">Сохранить</button>
-
+                <button type="submit" class="form__save">Сохранить</button>
             </form>
         </div>
-    </div>
+    </template>
 
-    <div class="popup popup_kind_new-card">
-        <div class="popup__container">
-            <button type="button" class="popup__close popup_kind_close-card"></button>
-            <h2 class="popup__title">Новое место</h2>
-            <form class="popup__form">
-                <fieldset class="popup__user-info">
-                    <input type="text" class="input input_type_name " placeholder="Название">
-                    <input type="text" class="input input_type_about" placeholder="Ссылка на картинку">
+    <template id="add-place-form-template">
+        <div class="card card_with-shadow form">
+            <h2 class="form__title">Новое место</h2>
+            <form class="form__form">
+                <fieldset class="form__user-info">
+                    <input type="text" class="input input_type_name" placeholder="Название">
+                    <input type="text" class="input input_type_link" placeholder="Ссылка на картинку">
                 </fieldset>
-                <button type="submit" class="popup__save">Создать</button>
+                <button type="submit" class="form__save">Создать</button>
             </form>
         </div>
-    </div>
-
+    </template>
 </div>
 <script src="scripts/index.js"></script>
 </body>
