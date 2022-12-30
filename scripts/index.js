@@ -75,16 +75,14 @@ function createNewPlaceForm() {
     const formElement = addPlaceFormTemplate.querySelector('.form').cloneNode(true);
     const form = formElement.querySelector('.form__form');
     const nameInputElement = formElement.querySelector('.input_type_name');
-    const linkInputElement = formElement.querySelector('.input_type_link')
+    const linkInputElement = formElement.querySelector('.input_type_link');
 
     form.addEventListener('submit', handleFormSubmit);
 
     function handleFormSubmit(event) {
         event.preventDefault();
         const cardElement = createCard({
-            name: nameInputElement.value,
-            link: linkInputElement.value,
-            like: false,
+            name: nameInputElement.value, link: linkInputElement.value, like: false,
         });
         document.querySelector('.groups').prepend(cardElement);
         closePopup();
@@ -119,8 +117,10 @@ function createUserForm(userData) {
 function createCard(cardData) {
     const cardTemplate = document.querySelector('#card-template').content;
     const cardElement = cardTemplate.querySelector('.group').cloneNode(true);
+    const imageElement = cardElement.querySelector('.group__image');
     cardElement.querySelector('.group__text').textContent = cardData.name;
-    cardElement.querySelector('.group__image').src = cardData.link;
+    imageElement.src = cardData.link;
+    imageElement.alt = cardData.name;
 
     if (cardData.like === true) {
         cardElement.querySelector('.group__like').classList.add('group__like_active');
@@ -134,8 +134,24 @@ function createCard(cardData) {
         cardElement.querySelector('.group__like').classList.toggle('group__like_active');
     });
 
+    imageElement.addEventListener('click', function() {
+        const fullScreenImageElement = createFullScreenImage(cardData);
+        openPopup(fullScreenImageElement);
+    });
+
     return cardElement;
 }
+
+function createFullScreenImage(cardData) {
+    const fullScreenImageTemplate = document.querySelector('#fullscreen-image-template').content;
+    const fullScreenImageElement = fullScreenImageTemplate.querySelector('.fullscreen-image').cloneNode(true);
+    fullScreenImageElement.querySelector('.fullscreen-image__text').textContent = cardData.name;
+    fullScreenImageElement.querySelector('.fullscreen-image__image').alt = cardData.name;
+    fullScreenImageElement.querySelector('.fullscreen-image__image').src = cardData.link;
+    return fullScreenImageElement;
+
+}
+
 
 const profileButton = document.querySelector('.profile__edit-button');
 const popupNewCard = document.querySelector('.profile__add-button');
