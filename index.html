@@ -38,6 +38,54 @@
         <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
 
+    <div id="popup-user-profile" class="popup">
+        <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <div class="popup__content">
+                <div class="card card_with-shadow form">
+                    <h2 class="form__title">Редактировать профиль</h2>
+                    <form class="form__form">
+                        <fieldset class="form__user-info">
+                            <input type="text" class="input input_type_name" placeholder="Имя">
+                            <input type="text" class="input input_type_about" placeholder="О себе">
+                        </fieldset>
+                        <button type="submit" class="form__save">Сохранить</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup-new-place" class="popup">
+        <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <div class="popup__content">
+                <div class="card card_with-shadow form">
+                    <h2 class="form__title">Новое место</h2>
+                    <form class="form__form">
+                        <fieldset class="form__user-info">
+                            <input type="text" class="input input_type_name" placeholder="Название">
+                            <input type="text" class="input input_type_link" placeholder="Ссылка на картинку">
+                        </fieldset>
+                        <button type="submit" class="form__save">Создать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup-fullscreen" class="popup">
+        <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <div class="popup__content">
+                <figure class="fullscreen-image">
+                    <img class="fullscreen-image__image">
+                    <figcaption class="fullscreen-image__text"></figcaption>
+                </figure>
+            </div>
+        </div>
+    </div>
+
     <template id="card-template">
         <div class="group card">
             <img class="group__image">
@@ -47,49 +95,6 @@
             </div>
             <button type="button" class="group__remove"></button>
         </div>
-    </template>
-
-    <template id="popup-template">
-        <div class="popup">
-            <div class="popup__container">
-                <button type="button" class="popup__close"></button>
-                <div class="popup__content">
-                </div>
-            </div>
-        </div>
-    </template>
-
-    <template id="edit-user-form-template">
-        <div class="card card_with-shadow form">
-            <h2 class="form__title">Редактировать профиль</h2>
-            <form class="form__form">
-                <fieldset class="form__user-info">
-                    <input type="text" class="input input_type_name" placeholder="Имя">
-                    <input type="text" class="input input_type_about" placeholder="О себе">
-                </fieldset>
-                <button type="submit" class="form__save">Сохранить</button>
-            </form>
-        </div>
-    </template>
-
-    <template id="add-place-form-template">
-        <div class="card card_with-shadow form">
-            <h2 class="form__title">Новое место</h2>
-            <form class="form__form">
-                <fieldset class="form__user-info">
-                    <input type="text" class="input input_type_name" placeholder="Название">
-                    <input type="text" class="input input_type_link" placeholder="Ссылка на картинку">
-                </fieldset>
-                <button type="submit" class="form__save">Создать</button>
-            </form>
-        </div>
-    </template>
-
-    <template id="fullscreen-image-template">
-        <figure class="fullscreen-image">
-            <img class="fullscreen-image__image">
-            <figcaption class="fullscreen-image__text"></figcaption>
-        </figure>
     </template>
 </div>
 <script src="scripts/index.js"></script>
