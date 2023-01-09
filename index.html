@@ -44,10 +44,10 @@
             <div class="popup__content">
                 <div class="card card_with-shadow form">
                     <h2 class="form__title">Редактировать профиль</h2>
-                    <form class="form__form">
+                    <form class="form__form" novalidate>
                         <fieldset class="form__user-info">
-                            <input type="text" class="input input_type_name" placeholder="Имя">
-                            <input type="text" class="input input_type_about" placeholder="О себе">
+                            <input type="text" class="input input_type_name" placeholder="Имя" minlength="2" maxlength="40" required>
+                            <input type="text" class="input input_type_about" placeholder="О себе" minlength="2" maxlength="200" required>
                         </fieldset>
                         <button type="submit" class="form__save">Сохранить</button>
                     </form>
@@ -97,6 +97,7 @@
         </div>
     </template>
 </div>
+<script src="scripts/validate.js"></script>
 <script src="scripts/index.js"></script>
 </body>
 </html>
