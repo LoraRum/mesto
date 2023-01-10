@@ -39,6 +39,9 @@
 @import url(../blocks/popup/_dark/popup_dark.css);
 
 @import url(../blocks/input/input.css);
+@import url(../blocks/input/_error/input_error.css);
+@import url(../blocks/input/_error/_active/input_error_active.css);
+
 
 @import url(../blocks/card/card.css);
 @import url(../blocks/card/_with-shadow/card_with-shadow.css);

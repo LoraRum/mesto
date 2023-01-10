@@ -152,3 +152,7 @@ initialCards.forEach(function(cardData) {
     const cardElement = createCard(cardData);
     groupsElement.appendChild(cardElement);
 });
+
+const validationConfig = {
+
+}
