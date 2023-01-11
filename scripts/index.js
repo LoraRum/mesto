@@ -153,6 +153,8 @@ initialCards.forEach(function(cardData) {
     groupsElement.appendChild(cardElement);
 });
 
-const validationConfig = {
 
-}
+// Вынесем все необходимые элементы формы в константы
+const formElement = document.querySelector('.form');
+const formInput = formElement.querySelector('.form__input');
+

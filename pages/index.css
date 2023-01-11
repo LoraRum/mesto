@@ -40,6 +40,7 @@
 
 @import url(../blocks/input/input.css);
 @import url(../blocks/input/_error/input_error.css);
+@import url(../blocks/input/_type/_error/input_type_error.css);
 @import url(../blocks/input/_error/_active/input_error_active.css);
 
 
@@ -47,10 +48,12 @@
 @import url(../blocks/card/_with-shadow/card_with-shadow.css);
 
 @import url(../blocks/form/form.css);
+@import url(../blocks/form/__save/_unavailable/form__save_unavailable.css);
 @import url(../blocks/form/__form/form__form.css);
 @import url(../blocks/form/__save/form__save.css);
 @import url(../blocks/form/__title/form__title.css);
 @import url(../blocks/form/__user-info/form__user-info.css);
+
 
 @import url(../blocks/fullscreen-image/fullscreen-image.css);
 @import url(../blocks/fullscreen-image/__image/fullscreen-image__image.css);
