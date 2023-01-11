@@ -80,6 +80,11 @@ function closePopupFullscreen() {
 
 function openPopup(popup) {
     popup.classList.add('popup_opened');
+    document.addEventListener('keydown', (e) => {
+       if(e.key === 'Escape') {
+           popup.classList.remove('popup_opened');
+       }
+    })
 }
 
 function closePopup(popup) {
@@ -96,7 +101,7 @@ function handleUserProfileFormSubmit(event) {
 function handleNewPlaceFormSubmit(event) {
     event.preventDefault();
     const cardElement = createCard({
-        name: newPlacePopupName.value, link: newPlacePopupAbout.value, like: false,
+        name: newPlacePopupName.value, link: newPlacePopupAbout.value,
     });
     groupsElement.prepend(cardElement);
     closePopup(newPlacePopup);
@@ -157,4 +162,29 @@ initialCards.forEach(function(cardData) {
 // Вынесем все необходимые элементы формы в константы
 const formElement = document.querySelector('.form');
 const formInput = formElement.querySelector('.form__input');
+
+const validationConfig = {
+    formSelector: '.form__form',
+    inputSelector: '.input',
+    submitButtonClass: '.form__save',
+    inactiveButtonClass: '.form__save_unavailable',
+    inputClassError : '.input_type_error',
+    errorClass : '.input_error_active'
+}
+const userForm = document.querySelector('#userForm');
+const usernameInput = document.querySelector('#username');
+const aboutInput = document.querySelector('#about');
+
+const placeForm = document.querySelector('#placeForm');
+const placeNameInput = document.querySelector('#place-name');
+const linkInput = document.querySelector('#link');
+
+function handlerSubmit(evt) {
+    evt.preventDefault();
+}
+
+userForm.addEventListener('submit', handlerSubmit);
+placeForm.addEventListener('submit', handlerSubmit);
+
+enableValidation(validationConfig);
 

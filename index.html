@@ -44,12 +44,12 @@
             <div class="popup__content">
                 <div class="card card_with-shadow form">
                     <h2 class="form__title">Редактировать профиль</h2>
-                    <form class="form__form" >
+                    <form class="form__form" id="userForm" novalidate>
                         <fieldset class="form__user-info">
                             <input type="text" id="username" class="input input_type_name" placeholder="Имя" minlength="2" maxlength="40" required>
-                            <span class="username-error  input_error"></span>
+                            <span class="username-error  popup__input-error"></span>
                             <input type="text" id="about" class="input input_type_about" placeholder="О себе" minlength="2" maxlength="200" required>
-                            <span class="about-error input_error"></span>
+                            <span class="about-error popup__input-error"></span>
                         </fieldset>
                         <button type="submit" class="form__save form__save_unavailable">Сохранить</button>
                     </form>
@@ -64,12 +64,12 @@
             <div class="popup__content">
                 <div class="card card_with-shadow form">
                     <h2 class="form__title">Новое место</h2>
-                    <form class="form__form" novalidate>
+                    <form class="form__form" id="placeForm" novalidate>
                         <fieldset class="form__user-info">
                             <input type="text" id="place-name" class="input input_type_name" placeholder="Название" required minlength="2" maxlength="30">
-                            <span class="place-name-error input_error"></span>
+                            <span class="place-name-error popup__input-error"></span>
                             <input type="url" id="link" class="input input_type-link" placeholder="Ссылка на картинку" required>
-                            <span class="link-error input_error"></span>
+                            <span class="link-error popup__input-error"></span>
                         </fieldset>
                         <button type="submit" class="form__save form__save_unavailable">Создать</button>
                     </form>

@@ -39,7 +39,7 @@
 @import url(../blocks/popup/_dark/popup_dark.css);
 
 @import url(../blocks/input/input.css);
-@import url(../blocks/input/_error/input_error.css);
+@import url(../blocks/popup/__input-error/popup__input-error.css);
 @import url(../blocks/input/_type/_error/input_type_error.css);
 @import url(../blocks/input/_error/_active/input_error_active.css);
 
