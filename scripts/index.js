@@ -1,20 +1,3 @@
-const initialCards = [
-    {
-        name: 'Архыз', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
-    }, {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
-    }, {
-        name: 'Иваново', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
-    }, {
-        name: 'Камчатка', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
-    }, {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
-    }, {
-        name: 'Байкал', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
-    },
-];
 const userProfileButton = document.querySelector('.profile__edit-button');
 const popupNewPlaceButton = document.querySelector('.profile__add-button');
 const groupsElement = document.querySelector('.groups');
@@ -44,6 +27,10 @@ const userProfilePopupCloseButton = userProfilePopup.querySelector('.popup__clos
 const userProfilePopupName = userProfilePopup.querySelector('.input_type_name');
 const userProfilePopupAbout = userProfilePopup.querySelector('.input_type_about');
 const userProfileForm = userProfilePopup.querySelector('.form__form');
+
+const cardTemplate = document.querySelector('#card-template').content.querySelector('.group');
+
+let currentPopup;
 
 populateUserProfileForm();
 
@@ -79,17 +66,22 @@ function closePopupFullscreen() {
     closePopup(fullscreenImagePopup);
 }
 
+function handleEscapeKeydown(e) {
+    if (e.key === 'Escape') {
+        closePopup(currentPopup);
+    }
+}
+
 function openPopup(popup) {
+    currentPopup = popup;
     popup.classList.add('popup_opened');
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closePopup(popup);
-        }
-    });
+
+    document.addEventListener('keydown', handleEscapeKeydown);
 }
 
 function closePopup(popup) {
     popup.classList.remove('popup_opened');
+    document.removeEventListener('keydown', handleEscapeKeydown);
 }
 
 function handleUserProfileFormSubmit(event) {
@@ -109,8 +101,7 @@ function handleNewPlaceFormSubmit(event) {
 }
 
 function createCard(cardData) {
-    const cardTemplate = document.querySelector('#card-template').content;
-    const cardElement = cardTemplate.querySelector('.group').cloneNode(true);
+    const cardElement = cardTemplate.cloneNode(true);
     const imageElement = cardElement.querySelector('.group__image');
     const likeElement = cardElement.querySelector('.group__like');
 
@@ -158,28 +149,6 @@ initialCards.forEach(function(cardData) {
     const cardElement = createCard(cardData);
     groupsElement.appendChild(cardElement);
 });
-
-// Вынесем все необходимые элементы формы в константы
-const formElement = document.querySelector('.form');
-const formInput = formElement.querySelector('.form__input');
-
-const validationConfig = {
-    formSelector: '.form__form',
-    inputSelector: '.input',
-    submitButtonClass: '.form__save',
-    inactiveButtonClass: 'form__save_unavailable',
-    inputClassError: '.input_type_error',
-    errorClass: 'input_error_active',
-};
-const userForm = document.querySelector('#userForm');
-const placeForm = document.querySelector('#placeForm');
-
-function handlerSubmit(evt) {
-    evt.preventDefault();
-}
-
-userForm.addEventListener('submit', handlerSubmit);
-placeForm.addEventListener('submit', handlerSubmit);
 
 enableValidation(validationConfig);
 
