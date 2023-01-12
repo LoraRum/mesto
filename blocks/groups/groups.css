@@ -5,7 +5,7 @@
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(auto-fit 282px, 1fr);
-    grid-template-columns: repeat(auto-fit,282px);
+    grid-template-columns: repeat(auto-fit, 282px);
 }
 
 @media screen and (min-width: 1024px) {

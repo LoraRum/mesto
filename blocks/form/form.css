@@ -1,7 +1,7 @@
 .form {
     padding: 25px 0 0;
-     max-width: 430px;
-     width: calc(100vw - 38px);
+    max-width: 430px;
+    width: calc(100vw - 38px);
 }
 
 @media screen and (min-width: 768px) {

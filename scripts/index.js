@@ -1,22 +1,18 @@
 const initialCards = [
     {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+        name: 'Архыз', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
     }, {
         name: 'Челябинская область',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
     }, {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+        name: 'Иваново', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
     }, {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+        name: 'Камчатка', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
     }, {
         name: 'Холмогорский район',
         link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
     }, {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+        name: 'Байкал', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
     },
 ];
 const userProfileButton = document.querySelector('.profile__edit-button');
@@ -49,9 +45,14 @@ const userProfilePopupName = userProfilePopup.querySelector('.input_type_name');
 const userProfilePopupAbout = userProfilePopup.querySelector('.input_type_about');
 const userProfileForm = userProfilePopup.querySelector('.form__form');
 
-function openPopupUserProfile() {
+populateUserProfileForm();
+
+function populateUserProfileForm() {
     userProfilePopupName.value = userProfileName.textContent;
     userProfilePopupAbout.value = userProfileAbout.textContent;
+}
+
+function openPopupUserProfile() {
     openPopup(userProfilePopup);
 }
 
@@ -81,10 +82,10 @@ function closePopupFullscreen() {
 function openPopup(popup) {
     popup.classList.add('popup_opened');
     document.addEventListener('keydown', (e) => {
-       if(e.key === 'Escape') {
-           popup.classList.remove('popup_opened');
-       }
-    })
+        if (e.key === 'Escape') {
+            closePopup(popup);
+        }
+    });
 }
 
 function closePopup(popup) {
@@ -158,7 +159,6 @@ initialCards.forEach(function(cardData) {
     groupsElement.appendChild(cardElement);
 });
 
-
 // Вынесем все необходимые элементы формы в константы
 const formElement = document.querySelector('.form');
 const formInput = formElement.querySelector('.form__input');
@@ -168,16 +168,11 @@ const validationConfig = {
     inputSelector: '.input',
     submitButtonClass: '.form__save',
     inactiveButtonClass: 'form__save_unavailable',
-    inputClassError : '.input_type_error',
-    errorClass : 'input_error_active'
-}
+    inputClassError: '.input_type_error',
+    errorClass: 'input_error_active',
+};
 const userForm = document.querySelector('#userForm');
-const usernameInput = document.querySelector('#username');
-const aboutInput = document.querySelector('#about');
-
 const placeForm = document.querySelector('#placeForm');
-const placeNameInput = document.querySelector('#place-name');
-const linkInput = document.querySelector('#link');
 
 function handlerSubmit(evt) {
     evt.preventDefault();

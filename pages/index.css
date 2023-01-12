@@ -48,10 +48,10 @@
 @import url(../blocks/card/_with-shadow/card_with-shadow.css);
 
 @import url(../blocks/form/form.css);
-@import url(../blocks/form/__save/_unavailable/form__save_unavailable.css);
 @import url(../blocks/form/__form/form__form.css);
-@import url(../blocks/form/__save/form__save.css);
 @import url(../blocks/form/__title/form__title.css);
+@import url(../blocks/form/__save/form__save.css);
+@import url(../blocks/form/__save/_unavailable/form__save_unavailable.css);
 @import url(../blocks/form/__user-info/form__user-info.css);
 
 
