@@ -1,3 +1,4 @@
+
 function showInputError(formElement, inputElement, config) {
     const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
     errorElement.classList.add(config.inputClassError);
@@ -47,7 +48,7 @@ function setEventListeners(formElement, config) {
     });
 }
 
-function enableValidation(config) {
+export function enableValidation(config) {
     const formList = Array.from(document.querySelectorAll(config.formSelector));
     formList.forEach((formElement) => {
         setEventListeners(formElement, config);

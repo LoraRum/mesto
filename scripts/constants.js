@@ -6,3 +6,4 @@ const validationConfig = {
     inputClassError: '.input_type_error',
     errorClass: 'input_error_active',
 };
+export default validationConfig;
