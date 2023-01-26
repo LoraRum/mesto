@@ -1,8 +1,8 @@
-import Card from './Card.js'
+import Card from './Card.js';
 import initialCards from './initialCards.js';
 import validationConfig from './constants.js';
 import {closePopup, openPopupUserProfile, openPopupNewPlace} from './popups.js';
-import {enableValidation} from './validate.js';
+import FormValidator from './FormValidator.js';
 
 const userProfileButton = document.querySelector('.profile__edit-button');
 const popupNewPlaceButton = document.querySelector('.profile__add-button');
@@ -22,7 +22,6 @@ const userProfilePopupName = userProfilePopup.querySelector('.input_type_name');
 const userProfilePopupAbout = userProfilePopup.querySelector('.input_type_about');
 const userProfileForm = userProfilePopup.querySelector('.form__form');
 
-const cardTemplate = document.querySelector('#card-template').content.querySelector('.group');
 
 function populateUserProfileForm() {
     userProfilePopupName.value = userProfileName.textContent;
@@ -38,35 +37,14 @@ function handleUserProfileFormSubmit(event) {
 
 function handleNewPlaceFormSubmit(event) {
     event.preventDefault();
-    const cardElement = createCard({
-        name: newPlacePopupName.value, link: newPlacePopupAbout.value,
-    });
+    const cardData = {
+        name: newPlacePopupName.value,
+        link: newPlacePopupAbout.value
+    };
+    const card = new Card(cardData, '#card-template');
+    const cardElement = card.getCard();
     groupsElement.prepend(cardElement);
     closePopup(newPlacePopup);
-}
-
-function createCard(cardData) {
-    const cardElement = cardTemplate.cloneNode(true);
-    const imageElement = cardElement.querySelector('.group__image');
-    const likeElement = cardElement.querySelector('.group__like');
-
-    cardElement.querySelector('.group__text').textContent = cardData.name;
-    imageElement.src = cardData.link;
-    imageElement.alt = cardData.name;
-
-    cardElement.querySelector('.group__remove').addEventListener('click', function() {
-        cardElement.remove();
-    });
-
-    likeElement.addEventListener('click', function() {
-        likeElement.classList.toggle('group__like_active');
-    });
-
-    imageElement.addEventListener('click', function() {
-        openPopupFullscreen(cardData);
-    });
-
-    return cardElement;
 }
 
 userProfileButton.addEventListener('click', openPopupUserProfile);
@@ -75,10 +53,15 @@ userProfileForm.addEventListener('submit', handleUserProfileFormSubmit);
 newPlaceForm.addEventListener('submit', handleNewPlaceFormSubmit);
 
 initialCards.forEach(function(cardData) {
-    const cardElement = createCard(cardData);
-    const card = new Card(cardData)
+    const card = new Card(cardData, '#card-template');
     groupsElement.appendChild(card.getCard());
 });
 
 populateUserProfileForm();
-enableValidation(validationConfig);
+
+const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
+formList.forEach((formElement) => {
+    const validator = new FormValidator(formElement, validationConfig);
+
+    validator.enableValidation();
+});

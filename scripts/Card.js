@@ -1,9 +1,9 @@
 import {openPopupFullscreen} from './popups.js';
 
 class Card {
-    constructor(cardData) {
+    constructor(cardData, templateSelector) {
         this._cardData = cardData;
-        const cardTemplate = document.querySelector('#card-template').content.querySelector('.group');
+        const cardTemplate = document.querySelector(templateSelector).content.querySelector('.group');
         this._cardElement = cardTemplate.cloneNode(true);
         this._imageElement = this._cardElement.querySelector('.group__image');
         this._likeElement = this._cardElement.querySelector('.group__like');

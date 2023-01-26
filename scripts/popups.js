@@ -16,6 +16,7 @@ const userProfilePopupContainer = userProfilePopup.querySelector('.popup__contai
 const userProfilePopupCloseButton = userProfilePopup.querySelector('.popup__close');
 
 let currentPopup;
+
 export function openPopupUserProfile() {
     openPopup(userProfilePopup);
 }
@@ -75,4 +76,4 @@ fullscreenImagePopupCloseButton.addEventListener('click', closePopupFullscreen);
 
 userProfilePopup.addEventListener('click', closePopupUserProfile);
 userProfilePopupContainer.addEventListener('click', stopEventPropagation);
-userProfilePopupCloseButton.addEventListener('click', closePopupUserProfile)
+userProfilePopupCloseButton.addEventListener('click', closePopupUserProfile);
