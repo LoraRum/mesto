@@ -21,6 +21,11 @@ const userProfilePopupName = userProfilePopup.querySelector('.input_type_name');
 const userProfilePopupAbout = userProfilePopup.querySelector('.input_type_about');
 const userProfileForm = userProfilePopup.querySelector('.form__form');
 
+const userProfileFormValidator = new FormValidator(userProfileForm, validationConfig);
+const newPlaceFormValidator = new FormValidator(newPlaceForm, validationConfig);
+
+userProfileFormValidator.enableValidation();
+newPlaceFormValidator.enableValidation();
 
 function populateUserProfileForm() {
     userProfilePopupName.value = userProfileName.textContent;
@@ -43,6 +48,8 @@ function handleNewPlaceFormSubmit(event) {
     const card = createCard(cardData);
     groupsElement.prepend(card);
     closePopup(newPlacePopup);
+    newPlaceForm.reset();
+    newPlaceFormValidator.disableSubmitButton();
 }
 
 function createCard(cardData) {
@@ -61,10 +68,3 @@ initialCards.forEach(function(cardData) {
 });
 
 populateUserProfileForm();
-
-const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
-formList.forEach((formElement) => {
-    const validator = new FormValidator(formElement, validationConfig);
-
-    validator.enableValidation();
-});

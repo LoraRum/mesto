@@ -1,5 +1,4 @@
 export const validationConfig = {
-    formSelector: '.form__form',
     inputSelector: '.input',
     submitButtonClass: '.form__save',
     inactiveButtonClass: 'form__save_unavailable',
