@@ -24,13 +24,13 @@
                 <div class="profile__date">
                     <div class="profile__info">
                         <h1 class="profile__title">Жак-Ив Кусто</h1>
-                        <button type="button" class="profile__edit-button"></button>
+                        <button type="button" class="profile__edit-button" aria-label="изменить данные пользоватедя"></button>
                     </div>
                     <p class="profile__subtitle">Исследователь океана</p>
                 </div>
             </div>
 
-            <button type="button" class="profile__add-button"></button>
+            <button type="button" class="profile__add-button" aria-label="добавить новое место"></button>
         </section>
         <section class="groups" aria-label="Галерея фотографий">
         </section>
@@ -41,7 +41,7 @@
 
     <div id="popup-user-profile" class="popup">
         <div class="popup__container">
-            <button type="button" class="popup__close"></button>
+            <button type="button" class="popup__close" aria-label="закрыть попап"></button>
             <div class="popup__content">
                 <div class="card card_with-shadow form">
                     <h2 class="form__title">Редактировать профиль</h2>
@@ -61,7 +61,7 @@
 
     <div id="popup-new-place" class="popup">
         <div class="popup__container">
-            <button type="button" class="popup__close"></button>
+            <button type="button" class="popup__close" aria-label="закрыть попап"></button>
             <div class="popup__content">
                 <div class="card card_with-shadow form">
                     <h2 class="form__title">Новое место</h2>
@@ -81,10 +81,10 @@
 
     <div id="popup-fullscreen" class="popup popup_dark">
         <div class="popup__container">
-            <button type="button" class="popup__close"></button>
+            <button type="button" class="popup__close" aria-label="закрыть попап"></button>
             <div class="popup__content">
                 <figure class="fullscreen-image">
-                    <img class="fullscreen-image__image">
+                    <img class="fullscreen-image__image" src="#" alt="">
                     <figcaption class="fullscreen-image__text"></figcaption>
                 </figure>
             </div>
@@ -93,12 +93,12 @@
 
     <template id="card-template">
         <div class="group card">
-            <img class="group__image">
+            <img class="group__image" src="#" alt="">
             <div class="group__box">
                 <h2 class="group__text"></h2>
-                <button type="button" class="group__like"></button>
+                <button type="button" class="group__like" aria-label="кнопка лайк"></button>
             </div>
-            <button type="button" class="group__remove"></button>
+            <button type="button" class="group__remove" aria-label="кнопка удаления"></button>
         </div>
     </template>
 </div>

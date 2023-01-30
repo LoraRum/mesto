@@ -1,6 +1,5 @@
 import Card from './Card.js';
-import initialCards from './initialCards.js';
-import validationConfig from './constants.js';
+import {initialCards, validationConfig} from './constants.js';
 import {closePopup, openPopupUserProfile, openPopupNewPlace} from './popups.js';
 import FormValidator from './FormValidator.js';
 
@@ -41,10 +40,14 @@ function handleNewPlaceFormSubmit(event) {
         name: newPlacePopupName.value,
         link: newPlacePopupAbout.value
     };
-    const card = new Card(cardData, '#card-template');
-    const cardElement = card.getCard();
-    groupsElement.prepend(cardElement);
+    const card = createCard(cardData);
+    groupsElement.prepend(card);
     closePopup(newPlacePopup);
+}
+
+function createCard(cardData) {
+    const card = new Card(cardData, '#card-template');
+    return card.getCard();
 }
 
 userProfileButton.addEventListener('click', openPopupUserProfile);
@@ -53,8 +56,8 @@ userProfileForm.addEventListener('submit', handleUserProfileFormSubmit);
 newPlaceForm.addEventListener('submit', handleNewPlaceFormSubmit);
 
 initialCards.forEach(function(cardData) {
-    const card = new Card(cardData, '#card-template');
-    groupsElement.appendChild(card.getCard());
+    const card = createCard(cardData);
+    groupsElement.appendChild(card);
 });
 
 populateUserProfileForm();

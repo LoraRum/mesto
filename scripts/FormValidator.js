@@ -3,6 +3,7 @@ class FormValidator {
         this._config = config;
         this._formElement = formElement;
         this._inputList = Array.from(formElement.querySelectorAll(this._config.inputSelector));
+        this._buttonElement = formElement.querySelector(this._config.submitButtonClass);
     }
 
     _showInputError(inputElement) {
@@ -41,14 +42,17 @@ class FormValidator {
         }
     }
 
+    disable() {
+        this._toggleButtonState(this._buttonElement, true);
+    }
+
     _setEventListeners(formElement) {
-        const buttonElement = formElement.querySelector(this._config.submitButtonClass);
-        this._toggleButtonState(buttonElement);
+        this._toggleButtonState(this._buttonElement);
 
         this._inputList.forEach((inputElement) => {
             inputElement.addEventListener('input', () => {
                 this._checkInputValidity(inputElement);
-                this._toggleButtonState(buttonElement);
+                this._toggleButtonState(this._buttonElement);
             });
         });
     }
