@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import Card from './Card.js';
 import {initialCards, validationConfig} from './constants.js';
 import {closePopup, openPopupUserProfile, openPopupNewPlace} from './popups.js';
