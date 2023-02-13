@@ -1,6 +1,6 @@
 .group__remove {
     all: unset;
-    background-image: url(../../../images/Group.svg);
+    background-image: url(../../../src/images/Group.svg);
     outline: none;
     display: inline-block;
     text-align: center;

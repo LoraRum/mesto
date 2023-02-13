@@ -1,5 +1,5 @@
 .profile__edit-button {
-    background-image: url(../../../images/Edit-Button.svg);
+    background-image: url(../../../src/images/Edit-Button.svg);
     outline: none;
     display: inline-block;
     text-align: center;

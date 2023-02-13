@@ -1,9 +1,11 @@
-import '../pages/index.css';
+import './index.css';
 
-import Card from './Card.js';
-import {initialCards, validationConfig} from './constants.js';
-import {closePopup, openPopupUserProfile, openPopupNewPlace} from './popups.js';
-import FormValidator from './FormValidator.js';
+import Card from '../Card.js';
+import {initialCards, validationConfig} from '../constants.js';
+import {closePopup, openPopupUserProfile, openPopupNewPlace, openPopupFullscreen} from '../popups.js';
+import FormValidator from '../FormValidator.js';
+import Section  from '../Section.js';
+import Popup from '../Popup.js';
 
 const userProfileButton = document.querySelector('.profile__edit-button');
 const popupNewPlaceButton = document.querySelector('.profile__add-button');
@@ -38,7 +40,7 @@ function handleUserProfileFormSubmit(event) {
     event.preventDefault();
     userProfileName.textContent = userProfilePopupName.value;
     userProfileAbout.textContent = userProfilePopupAbout.value;
-    closePopup(userProfilePopup);
+    userProfilePopup.close();
 }
 
 function handleNewPlaceFormSubmit(event) {
@@ -49,15 +51,28 @@ function handleNewPlaceFormSubmit(event) {
     };
     const card = createCard(cardData);
     groupsElement.prepend(card);
-    closePopup(newPlacePopup);
+    newPlacePopup.close();
     newPlaceForm.reset();
     newPlaceFormValidator.disableSubmitButton();
 }
-
 function createCard(cardData) {
     const card = new Card(cardData, '#card-template');
     return card.getCard();
 }
+
+
+const groupsSection = new Section({
+    items: initialCards,
+    renderer: (item) => {
+        const card = new Card (item, '#card-template');
+        return card.getCard();
+    }
+},  '.groups');
+
+
+
+userProfileButton.addEventListener('click', openPopupUserProfile);
+popupNewPlaceButton.add;
 
 userProfileButton.addEventListener('click', openPopupUserProfile);
 popupNewPlaceButton.addEventListener('click', openPopupNewPlace);

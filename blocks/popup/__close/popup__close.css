@@ -1,5 +1,5 @@
 .popup__close {
-    background-image: url(../../../images/Close\ Icon.svg);
+    background-image: url(../../../src/images/Close\ Icon.svg);
     outline: none;
     display: inline-block;
     text-align: center;
