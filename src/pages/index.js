@@ -9,27 +9,50 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 
 const userProfileButton = document.querySelector('.profile__edit-button');
-const popupNewPlaceButton = document.querySelector('.profile__add-button');
-const newPlaceForm = document.querySelector('#popup-new-place .form__form');
+const newPlaceButton = document.querySelector('.profile__add-button');
 const userProfileForm = document.querySelector('#popup-user-profile .form__form');
+const newPlaceForm = document.querySelector('#popup-new-place .form__form');
+const userNameInput = userProfileForm.querySelector('#username');
+const userAboutInput = userProfileForm.querySelector('#about');
 
 const userProfileFormValidator = new FormValidator(userProfileForm, validationConfig);
 const newPlaceFormValidator = new FormValidator(newPlaceForm, validationConfig);
 
-userProfileFormValidator.enableValidation();
-newPlaceFormValidator.enableValidation();
-
-const popupUserProfile = new PopupWithForm('#popup-user-profile', {handleSubmit: handleUserProfileFormSubmit});
-const popupNewPlace = new PopupWithForm('#popup-new-place', {handleSubmit: handleNewPlaceFormSubmit});
+const popupUserProfile = new PopupWithForm('#popup-user-profile', {onSubmit: handleUserProfileFormSubmit});
+const popupNewPlace = new PopupWithForm('#popup-new-place', {onSubmit: handleNewPlaceFormSubmit});
 const popupFullScreen = new PopupWithImage('#popup-fullscreen');
 const cardsSection = new Section({items: initialCards, renderer: createCard}, '.groups');
 const userInfo = new UserInfo({
     userNameSelector: '.profile__title', aboutSelector: '.profile__subtitle',
 });
 
+userProfileButton.addEventListener('click', () => {
+    fillUserProfileForm();
+    popupUserProfile.open();
+});
+
+newPlaceButton.addEventListener('click', () => {
+    popupNewPlace.open();
+});
+
+userProfileFormValidator.enableValidation();
+newPlaceFormValidator.enableValidation();
+
 popupUserProfile.setEventListeners();
 popupNewPlace.setEventListeners();
 popupFullScreen.setEventListeners();
+userProfileButton.addEventListener('click', popupUserProfile.open);
+newPlaceButton.addEventListener('click', popupNewPlace.open);
+
+
+function fillUserProfileForm() {
+    const userInfoData = userInfo.getUserInfo();
+    const name = userInfoData.username;
+    const about = userInfoData.about;
+    userNameInput.value = name;
+    userAboutInput.value = about;
+}
+
 
 function createCard(cardData) {
     const card = new Card('#card-template', cardData, popupFullScreen.open.bind(popupFullScreen, cardData));
@@ -38,12 +61,10 @@ function createCard(cardData) {
 
 function handleUserProfileFormSubmit(data) {
     userInfo.setUserInfo(data);
+    userProfileFormValidator.disableSubmitButton();
 }
 
 function handleNewPlaceFormSubmit(data) {
-    const card = createCard(data);
-    cardsSection.addItem(card);
+    cardsSection.addItem(data);
+    newPlaceFormValidator.disableSubmitButton();
 }
-
-userProfileButton.addEventListener('click', popupUserProfile.open);
-popupNewPlaceButton.addEventListener('click', popupNewPlace.open);
