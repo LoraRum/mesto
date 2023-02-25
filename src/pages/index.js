@@ -2,7 +2,7 @@ import './index.css';
 
 import Card from '../components/Card.js';
 import {initialCards, validationConfig} from '../constants.js';
-import FormValidator from '../FormValidator.js';
+import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
@@ -28,10 +28,12 @@ const userInfo = new UserInfo({
 
 userProfileButton.addEventListener('click', () => {
     fillUserProfileForm();
+    userProfileFormValidator.disableSubmitButton();
     popupUserProfile.open();
 });
 
 newPlaceButton.addEventListener('click', () => {
+    newPlaceFormValidator.disableSubmitButton();
     popupNewPlace.open();
 });
 
@@ -41,8 +43,6 @@ newPlaceFormValidator.enableValidation();
 popupUserProfile.setEventListeners();
 popupNewPlace.setEventListeners();
 popupFullScreen.setEventListeners();
-userProfileButton.addEventListener('click', popupUserProfile.open);
-newPlaceButton.addEventListener('click', popupNewPlace.open);
 
 
 function fillUserProfileForm() {

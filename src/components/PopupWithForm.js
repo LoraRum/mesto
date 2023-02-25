@@ -5,14 +5,13 @@ class PopupWithForm extends Popup {
         super(popupSelector);
         this._onSubmit = onSubmit;
         this._form = this._popupElement.querySelector('.form__form');
+        this._inputList = this._form.querySelectorAll('input');
         this._handleSubmit = this._handleSubmit.bind(this);
     }
 
     _getInputValues() {
-        const inputs = Array.from(this._form.querySelectorAll('input'));
         const values = {};
-
-        inputs.forEach((input) => {
+        this._inputList.forEach((input) => {
             values[input.name] = input.value;
         });
         return values;
@@ -27,17 +26,7 @@ class PopupWithForm extends Popup {
         evt.preventDefault();
         const inputValues = this._getInputValues();
         this._onSubmit(inputValues);
-        this.close();
-    }
-
-    close() {
         super.close();
-        this._form.reset();
-    }
-
-    open() {
-        super.open();
-
     }
 }
 
