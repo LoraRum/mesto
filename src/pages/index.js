@@ -46,13 +46,10 @@ popupFullScreen.setEventListeners();
 
 
 function fillUserProfileForm() {
-    const userInfoData = userInfo.getUserInfo();
-    const name = userInfoData.username;
-    const about = userInfoData.about;
-    userNameInput.value = name;
+    const {about, username} = userInfo.getUserInfo();
+    userNameInput.value = username;
     userAboutInput.value = about;
 }
-
 
 function createCard(cardData) {
     const card = new Card('#card-template', cardData, popupFullScreen.open.bind(popupFullScreen, cardData));
@@ -61,10 +58,8 @@ function createCard(cardData) {
 
 function handleUserProfileFormSubmit(data) {
     userInfo.setUserInfo(data);
-    userProfileFormValidator.disableSubmitButton();
 }
 
 function handleNewPlaceFormSubmit(data) {
     cardsSection.addItem(data);
-    newPlaceFormValidator.disableSubmitButton();
 }
