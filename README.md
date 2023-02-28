@@ -1,5 +1,5 @@
 # Проект: mesto Russia
-ссылка на проект: https://lorarum.github.io/mesto/index.html
+ссылка на проект:  https://lorarum.github.io/mesto
 
 ## Описание:
 Сайт написаный с помощью языков CSS и HTML, по методологии БЭМ Nested,
