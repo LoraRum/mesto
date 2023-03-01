@@ -16,8 +16,10 @@
     <main>
         <section class="profile">
             <div class="profile__about">
-                <button class="profile__avatar-change" type="button">
-                    <img alt="Аватар" class="profile__avatar" src="<%=require('./images/image.jpg')%>">
+                <button class="avatar" type="button" aria-label="обновить аватар">
+                    <img alt="Аватар" class="avatar__image" src="<%=require('./images/image.jpg')%>">
+                    <div class="avatar__dark"></div>
+                    <img alt="Изменить аватар" class="avatar__pencil" src="<%=require('./images/change.svg')%>">
                 </button>
                 <div class="profile__date">
                     <div class="profile__info">
@@ -37,6 +39,39 @@
     <footer class="footer">
         <p class="footer__copyright">&#169; 2020 Mesto Russia</p>
     </footer>
+
+    <div class="popup" id="popup-change-avatar">
+        <div class="popup__container">
+            <button aria-label="закрыть попап" class="popup__close" type="button"></button>
+            <div class="popup__content">
+                <div class="card card_with-shadow form">
+                    <h2 class="form__title">Обновить аватар</h2>
+                    <form class="form__form" id="avatarForm" novalidate>
+                        <fieldset class="form__user-info">
+                            <input class="input input_type_link" id="avatar" name="avatar" placeholder="Введите ссылку на аватар"
+                                   required type="url">
+                            <span class="link-error popup__input-error"></span>
+                        </fieldset>
+                        <button class="form__save" type="submit">Создать</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup" id="popup-delete-card">
+        <div class="popup__container">
+            <button aria-label="закрыть попап" class="popup__close" type="button"></button>
+            <div class="popup__content">
+                <div class="card card_with-shadow form">
+                    <h2 class="form__title">Вы уверены?</h2>
+                    <form class="form__form" id="deleteCardForm" novalidate>
+                        <button class="form__save" type="submit">Да</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="popup" id="popup-user-profile">
         <div class="popup__container">

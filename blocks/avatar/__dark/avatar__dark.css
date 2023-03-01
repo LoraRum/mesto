@@ -1,0 +1,13 @@
+.avatar__dark {
+    background-color: rgba(0, 0, 0, 0.8);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 120px;
+    height: 120px;
+    opacity: 0;
+}
+
+.avatar__dark:hover {
+    opacity: 1;
+}
