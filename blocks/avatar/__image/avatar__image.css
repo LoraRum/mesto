@@ -1,6 +1,7 @@
 .avatar__image {
     border-radius: 50%;
     width: 120px;
+    height: 120px;
     background-size: cover;
     background-repeat: no-repeat;
 }

@@ -30,8 +30,7 @@ const newPlaceFormValidator = new FormValidator(newPlaceForm, validationConfig);
 const popupUserProfile = new PopupWithForm('#popup-user-profile', {
     onSubmit: (data) => {
         userInfo.setUserInfo(data);
-    },
-    onOpen: () => {
+    }, onOpen: () => {
         userProfileFormValidator.disableSubmitButton();
         const {about, username} = userInfo.getUserInfo();
         userNameInput.value = username;
@@ -93,3 +92,15 @@ function handleNewPlaceFormSubmit(data) {
     cardsSection.addItem(data);
 }
 
+fetch('https://nomoreparties.co/v1/cohort-60/users/me', {
+    method: 'GET', headers: {
+        authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
+        'Content-Type': 'application/json',
+    },
+})
+    .then(res => res.json())
+    .then((result) => {
+        console.log(result);
+        userAvatar.setUserAvatar({link: result.avatar});
+        userInfo.setUserInfo({username: result.name, about: result.about})
+    });
