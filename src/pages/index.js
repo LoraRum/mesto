@@ -59,39 +59,38 @@ const popupAvatarImage = new PopupWithForm('#popup-change-avatar', {
 });
 
 const popupFullScreen = new PopupWithImage('#popup-fullscreen');
-const cardsSection = new Section({items: initialCards, renderer: createCard},
-    '.groups',
-);
+
 const userInfo = new UserInfo({
     userNameSelector: '.profile__title', aboutSelector: '.profile__subtitle',
 });
 
+const cardsSection = new Section({
+    items: initialCards,
+    renderer: createCard
+}, '.groups');
+
+cardsSection.renderItems();
+
 userProfileButton.addEventListener('click', popupUserProfile.open);
-
 newPlaceButton.addEventListener('click', popupNewPlace.open);
-
 avatarImageButton.addEventListener('click', popupAvatarImage.open);
 
 userProfileFormValidator.enableValidation();
 newPlaceFormValidator.enableValidation();
-
 popupUserProfile.setEventListeners();
 popupNewPlace.setEventListeners();
 popupFullScreen.setEventListeners();
 popupAvatarImage.setEventListeners();
 
 function createCard(cardData) {
-    const card = new Card('#card-template',
-        cardData,
-        popupFullScreen.open.bind(popupFullScreen, cardData),
-    );
+    const card = new Card('#card-template', cardData, popupFullScreen.open.bind(popupFullScreen, { name, link }));
     return card.render();
 }
 
 function handleNewPlaceFormSubmit(data) {
     cardsSection.addItem(data);
 }
-
+//заполнение шапки профиля
 fetch('https://nomoreparties.co/v1/cohort-60/users/me', {
     method: 'GET', headers: {
         authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
@@ -104,3 +103,21 @@ fetch('https://nomoreparties.co/v1/cohort-60/users/me', {
         userAvatar.setUserAvatar({link: result.avatar});
         userInfo.setUserInfo({username: result.name, about: result.about})
     });
+
+//создание карточек
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-60/cards ', {
+    method: 'GET',
+    headers: {
+        authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
+        'Content-Type': 'application/json',
+    },
+})
+    .then(res => res.json())
+    .then((result) => {
+        console.log(result);
+        result.forEach((cardData) => {
+            cardsSection.addItem(cardData)
+        })
+    })
+
