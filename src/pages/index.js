@@ -8,6 +8,7 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import UserAvatar from '../components/UserAvatar.js';
+import card from '../components/Card.js';
 
 const userProfileButton = document.querySelector('.profile__edit-button');
 const newPlaceButton = document.querySelector('.profile__add-button');
@@ -99,7 +100,6 @@ fetch('https://nomoreparties.co/v1/cohort-60/users/me', {
 })
     .then(res => res.json())
     .then((result) => {
-        console.log(result);
         userAvatar.setUserAvatar({link: result.avatar});
         userInfo.setUserInfo({username: result.name, about: result.about})
     });
@@ -115,7 +115,6 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-60/cards ', {
 })
     .then(res => res.json())
     .then((result) => {
-        console.log(result);
         result.forEach((cardData) => {
             cardsSection.addItem(cardData)
         })
@@ -134,3 +133,21 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-60/users/me', {
         about: 'Student'
     })
 });
+
+//Добавление новой карточки
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-60/cards', {
+    method: 'POST',
+    headers: {
+        authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        name: 'New Card Name',
+        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    })
+})
+    .then(res => res.json())
+    .then(data => console.log(data));
+
+
