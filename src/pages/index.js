@@ -121,3 +121,16 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-60/cards ', {
         })
     })
 
+//Редактирование профиля
+
+fetch('https://mesto.nomoreparties.co/v1/cohort-60/users/me', {
+    method: 'PATCH',
+    headers: {
+        authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
+        'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+        name: 'Laura Rumiantseva',
+        about: 'Student'
+    })
+});
