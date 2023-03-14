@@ -30,7 +30,23 @@ const newPlaceFormValidator = new FormValidator(newPlaceForm, validationConfig);
 
 const popupUserProfile = new PopupWithForm('#popup-user-profile', {
     onSubmit: (data) => {
-        userInfo.setUserInfo(data);
+        fetch('https://mesto.nomoreparties.co/v1/cohort-60/users/me', {
+            method: 'PATCH',
+            headers: {
+                authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: data.username,
+                about: data.about
+            })
+        })
+            .then(res => res.json())
+            .then(data => userInfo.setUserInfo({
+                username: data.name,
+                about: data.about
+            }));
+
     }, onOpen: () => {
         userProfileFormValidator.disableSubmitButton();
         const {about, username} = userInfo.getUserInfo();
@@ -89,7 +105,19 @@ function createCard(cardData) {
 }
 
 function handleNewPlaceFormSubmit(data) {
-    cardsSection.addItem(data);
+    fetch('https://mesto.nomoreparties.co/v1/cohort-60/cards', {
+        method: 'POST',
+        headers: {
+            authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            name: 'New Card Name',
+            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+        })
+    })
+        .then(res => res.json())
+        .then(data => cardsSection.addItem(data));
 }
 //заполнение шапки профиля
 fetch('https://nomoreparties.co/v1/cohort-60/users/me', {
@@ -119,35 +147,4 @@ fetch('https://mesto.nomoreparties.co/v1/cohort-60/cards ', {
             cardsSection.addItem(cardData)
         })
     })
-
-//Редактирование профиля
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-60/users/me', {
-    method: 'PATCH',
-    headers: {
-        authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        name: 'Laura Rumiantseva',
-        about: 'Student'
-    })
-});
-
-//Добавление новой карточки
-
-fetch('https://mesto.nomoreparties.co/v1/cohort-60/cards', {
-    method: 'POST',
-    headers: {
-        authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-        name: 'New Card Name',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    })
-})
-    .then(res => res.json())
-    .then(data => console.log(data));
-
 
