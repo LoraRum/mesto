@@ -6,6 +6,9 @@ class Card {
         this._cardElement = this._getTemplate();
         this._imageElement = this._cardElement.querySelector('.group__image');
         this._likeElement = this._cardElement.querySelector('.group__like');
+        this._textElement = this._cardElement.querySelector('.group__text');
+        this._likesElement = this._cardElement.querySelector('.group__like-sum');
+
 
         this._populateTemplate();
         this._setEventListeners();
@@ -17,9 +20,10 @@ class Card {
 
 
     _populateTemplate() {
-        this._cardElement.querySelector('.group__text').textContent = this._cardData.name;
+        this._textElement.textContent = this._cardData.name;
         this._imageElement.src = this._cardData.link;
         this._imageElement.alt = this._cardData.name;
+        this._likesElement.textContent = this._cardData.likes.length;
     }
 
     _handleRemove() {

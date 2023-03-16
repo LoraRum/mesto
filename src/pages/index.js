@@ -1,7 +1,7 @@
 import './index.css';
 
 import Card from '../components/Card.js';
-import {initialCards, validationConfig} from '../constants.js';
+import { validationConfig} from '../constants.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -80,8 +80,6 @@ const popupAvatarImage = new PopupWithForm('#popup-change-avatar', {
     },
 });
 
-
-
 const popupFullScreen = new PopupWithImage('#popup-fullscreen');
 
 const userInfo = new UserInfo({
@@ -89,7 +87,7 @@ const userInfo = new UserInfo({
 });
 
 const cardsSection = new Section({
-    items: initialCards,
+    items: [],
     renderer: createCard
 }, '.groups');
 
@@ -107,7 +105,8 @@ popupFullScreen.setEventListeners();
 popupAvatarImage.setEventListeners();
 
 function createCard(cardData) {
-    const card = new Card('#card-template', cardData, popupFullScreen.open.bind(popupFullScreen, { name, link }));
+    const card = new Card('#card-template', cardData,
+        popupFullScreen.open.bind(popupFullScreen, { name, link }));
     return card.render();
 }
 
@@ -130,8 +129,8 @@ api.getUserInfo()
     .catch(err => {
         console.log(err);
     });
-//создание карточек
 
+//создание карточек
 api.getInitialCards()
     .then((result) => {
         result.forEach((cardData) => {

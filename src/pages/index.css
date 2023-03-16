@@ -27,6 +27,7 @@
 @import url(../../blocks/group/__box/group__box.css);
 @import url(../../blocks/group/__image/group__image.css);
 @import url(../../blocks/group/__like/group__like.css);
+@import url(../../blocks/group/__like-sum/group__like-sum.css);
 @import url(../../blocks/group/__likes/group__likes.css);
 @import url(../../blocks/group/__text/group__text.css);
 @import url(../../blocks/group/group.css);

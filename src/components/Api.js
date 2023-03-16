@@ -29,11 +29,11 @@ class Api {
         }).then(this._handleResponse);
     }
 
-    addCard({ name, link }) {
+    addCard({ name, link}) {
         return fetch(`${this._baseUrl}/cards`, {
             method: 'POST',
             headers: this._headers,
-            body: JSON.stringify({ name , link }),
+            body: JSON.stringify({ name , link}),
         }).then(this._handleResponse);
     }
 
@@ -51,6 +51,12 @@ class Api {
         }).then(this._handleResponse);
     }
 
+    removeCard(cardId) {
+        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+            method: 'DELETE',
+            headers: this._headers,
+        }).then((res) => this._handleResponse(res));
+    }
 }
 
 export default Api;
