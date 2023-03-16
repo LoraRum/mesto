@@ -1,14 +1,14 @@
 class Card {
-    constructor(templateSelector, cardData, handleCardClick) {
+    constructor(templateSelector, cardData, {onImageClick, onDeleteButtonClick}) {
         this._cardData = cardData;
         this._templateSelector = templateSelector;
-        this._handleCardClick = handleCardClick;
+        this._handleCardClick = onImageClick;
+        this._handleDeleteButtonClick = onDeleteButtonClick;
         this._cardElement = this._getTemplate();
         this._imageElement = this._cardElement.querySelector('.group__image');
         this._likeElement = this._cardElement.querySelector('.group__like');
         this._textElement = this._cardElement.querySelector('.group__text');
         this._likesElement = this._cardElement.querySelector('.group__like-sum');
-
 
         this._populateTemplate();
         this._setEventListeners();
@@ -27,7 +27,8 @@ class Card {
     }
 
     _handleRemove() {
-        this._cardElement.remove();
+        this._handleDeleteButtonClick();
+        //this._cardElement.remove();
     }
 
     _handleLike() {

@@ -1,7 +1,7 @@
 import './index.css';
 
 import Card from '../components/Card.js';
-import { validationConfig} from '../constants.js';
+import {validationConfig} from '../constants.js';
 import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithForm from '../components/PopupWithForm.js';
@@ -9,7 +9,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import UserAvatar from '../components/UserAvatar.js';
 import Api from '../components/Api.js';
-
+import Popup from '../components/Popup';
 
 const userProfileButton = document.querySelector('.profile__edit-button');
 const newPlaceButton = document.querySelector('.profile__add-button');
@@ -30,31 +30,27 @@ const userProfileFormValidator = new FormValidator(userProfileForm,
 const newPlaceFormValidator = new FormValidator(newPlaceForm, validationConfig);
 
 const api = new Api({
-    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-60',
-    headers: {
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-60', headers: {
         authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
-        'Content-Type': 'application/json'
-    }
+        'Content-Type': 'application/json',
+    },
 });
 
 const popupUserProfile = new PopupWithForm('#popup-user-profile', {
     onSubmit: (data) => {
         api.updateUserInfo({
-            name: data.username,
-            about: data.about
+            name: data.username, about: data.about,
         })
             .then((res) => {
                 userInfo.setUserInfo({
-                    username: res.name,
-                    about: res.about
+                    username: res.name, about: res.about,
                 });
                 popupUserProfile.close();
             })
             .catch((err) => console.log(err));
-    },
-    onOpen: () => {
+    }, onOpen: () => {
         userProfileFormValidator.disableSubmitButton();
-        const { about, username } = userInfo.getUserInfo();
+        const {about, username} = userInfo.getUserInfo();
         userNameInput.value = username;
         userAboutInput.value = about;
     },
@@ -67,7 +63,7 @@ const popupNewPlace = new PopupWithForm('#popup-new-place', {
 const popupAvatarImage = new PopupWithForm('#popup-change-avatar', {
     onSubmit: (inputValues) => {
         api.editAvatar({
-            avatar: inputValues.avatar
+            avatar: inputValues.avatar,
         })
             .then(data => {
                 userAvatar.getUserAvatar(data);
@@ -81,14 +77,14 @@ const popupAvatarImage = new PopupWithForm('#popup-change-avatar', {
 });
 
 const popupFullScreen = new PopupWithImage('#popup-fullscreen');
+const popupDeleteConfirmation = new Popup('#popup-delete-card');
 
 const userInfo = new UserInfo({
     userNameSelector: '.profile__title', aboutSelector: '.profile__subtitle',
 });
 
 const cardsSection = new Section({
-    items: [],
-    renderer: createCard
+    items: [], renderer: createCard,
 }, '.groups');
 
 cardsSection.renderItems();
@@ -103,15 +99,23 @@ popupUserProfile.setEventListeners();
 popupNewPlace.setEventListeners();
 popupFullScreen.setEventListeners();
 popupAvatarImage.setEventListeners();
+popupDeleteConfirmation.setEventListeners();
 
 function createCard(cardData) {
-    const card = new Card('#card-template', cardData,
-        popupFullScreen.open.bind(popupFullScreen, { name, link }));
+    const handleImageCLick = popupFullScreen.open.bind(popupFullScreen,
+        cardData,
+    );
+    const handleDeleteButton = popupDeleteConfirmation.open;
+
+    const card = new Card('#card-template',
+        cardData,
+        {onImageClick: handleImageCLick, onDeleteButtonClick: handleDeleteButton},
+    );
     return card.render();
 }
 
 function handleNewPlaceFormSubmit(data) {
-    api.addCard({name: data.name, link: data.link})
+    api.addCard(data)
         .then(cardData => {
             cardsSection.addItem(cardData);
         })
@@ -123,8 +127,8 @@ function handleNewPlaceFormSubmit(data) {
 //заполнение шапки профиля
 api.getUserInfo()
     .then((result) => {
-        userAvatar.setUserAvatar({ link: result.avatar });
-        userInfo.setUserInfo({ username: result.name, about: result.about });
+        userAvatar.setUserAvatar({link: result.avatar});
+        userInfo.setUserInfo({username: result.name, about: result.about});
     })
     .catch(err => {
         console.log(err);
@@ -134,9 +138,9 @@ api.getUserInfo()
 api.getInitialCards()
     .then((result) => {
         result.forEach((cardData) => {
-            cardsSection.addItem(cardData)
-        })
-    })
+            cardsSection.addItem(cardData);
+        });
+    });
 
 
 
