@@ -8,7 +8,8 @@ import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import UserAvatar from '../components/UserAvatar.js';
-import card from '../components/Card.js';
+import Api from '../components/Api.js';
+
 
 const userProfileButton = document.querySelector('.profile__edit-button');
 const newPlaceButton = document.querySelector('.profile__add-button');
@@ -28,28 +29,32 @@ const userProfileFormValidator = new FormValidator(userProfileForm,
 );
 const newPlaceFormValidator = new FormValidator(newPlaceForm, validationConfig);
 
+const api = new Api({
+    baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-60',
+    headers: {
+        authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
+        'Content-Type': 'application/json'
+    }
+});
+
 const popupUserProfile = new PopupWithForm('#popup-user-profile', {
     onSubmit: (data) => {
-        fetch('https://mesto.nomoreparties.co/v1/cohort-60/users/me', {
-            method: 'PATCH',
-            headers: {
-                authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                name: data.username,
-                about: data.about
-            })
+        api.updateUserInfo({
+            name: data.username,
+            about: data.about
         })
-            .then(res => res.json())
-            .then(data => userInfo.setUserInfo({
-                username: data.name,
-                about: data.about
-            }));
-
-    }, onOpen: () => {
+            .then((res) => {
+                userInfo.setUserInfo({
+                    username: res.name,
+                    about: res.about
+                });
+                popupUserProfile.close();
+            })
+            .catch((err) => console.log(err));
+    },
+    onOpen: () => {
         userProfileFormValidator.disableSubmitButton();
-        const {about, username} = userInfo.getUserInfo();
+        const { about, username } = userInfo.getUserInfo();
         userNameInput.value = username;
         userAboutInput.value = about;
     },
@@ -61,19 +66,21 @@ const popupNewPlace = new PopupWithForm('#popup-new-place', {
 });
 const popupAvatarImage = new PopupWithForm('#popup-change-avatar', {
     onSubmit: (inputValues) => {
-        fetch('https://mesto.nomoreparties.co/v1/cohort-60/users/me/avatar', {
-            method: 'PATCH', headers: {
-                authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
-                'Content-Type': 'application/json',
-            }, body: JSON.stringify({
-                avatar: inputValues.avatar,
-            }),
-        });
+        api.editAvatar({
+            avatar: inputValues.avatar
+        })
+            .then(data => {
+                userAvatar.getUserAvatar(data);
+                popupAvatarImage.close();
+            })
+            .catch((err) => console.log(err));
     }, onOpen: () => {
         const {link} = userAvatar.getUserAvatar();
         avatarImageInput.value = link;
     },
 });
+
+
 
 const popupFullScreen = new PopupWithImage('#popup-fullscreen');
 
@@ -105,46 +112,33 @@ function createCard(cardData) {
 }
 
 function handleNewPlaceFormSubmit(data) {
-    fetch('https://mesto.nomoreparties.co/v1/cohort-60/cards', {
-        method: 'POST',
-        headers: {
-            authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            name: 'New Card Name',
-            link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    api.addCard({name: data.name, link: data.link})
+        .then(cardData => {
+            cardsSection.addItem(cardData);
         })
-    })
-        .then(res => res.json())
-        .then(data => cardsSection.addItem(data));
+        .catch(err => {
+            console.log(err);
+        });
 }
-//заполнение шапки профиля
-fetch('https://nomoreparties.co/v1/cohort-60/users/me', {
-    method: 'GET', headers: {
-        authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
-        'Content-Type': 'application/json',
-    },
-})
-    .then(res => res.json())
-    .then((result) => {
-        userAvatar.setUserAvatar({link: result.avatar});
-        userInfo.setUserInfo({username: result.name, about: result.about})
-    });
 
+//заполнение шапки профиля
+api.getUserInfo()
+    .then((result) => {
+        userAvatar.setUserAvatar({ link: result.avatar });
+        userInfo.setUserInfo({ username: result.name, about: result.about });
+    })
+    .catch(err => {
+        console.log(err);
+    });
 //создание карточек
 
-fetch('https://mesto.nomoreparties.co/v1/cohort-60/cards ', {
-    method: 'GET',
-    headers: {
-        authorization: '6059afea-f832-4b2c-a73d-15748b82d9cd',
-        'Content-Type': 'application/json',
-    },
-})
-    .then(res => res.json())
+api.getInitialCards()
     .then((result) => {
         result.forEach((cardData) => {
             cardsSection.addItem(cardData)
         })
     })
+
+
+
 

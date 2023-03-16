@@ -4,7 +4,7 @@ export const validationConfig = {
     inactiveButtonClass: 'form__save_unavailable',
     inputClassError: '.input_type_error',
     errorClass: 'input_error_active',
-};
+}
 export const initialCards = [
     {
         name: 'Архыз', link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',

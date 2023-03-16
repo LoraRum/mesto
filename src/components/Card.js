@@ -16,7 +16,6 @@ class Card {
     }
 
 
-
     _populateTemplate() {
         this._cardElement.querySelector('.group__text').textContent = this._cardData.name;
         this._imageElement.src = this._cardData.link;
