@@ -1,15 +1,15 @@
 class UserAvatar {
-    constructor({avatarSelector}) {
+    constructor({ avatarSelector }) {
         this._avatarElement = document.querySelector(avatarSelector);
     }
 
     getUserAvatar() {
         return {
-            link: this._avatarElement.src
+            link: this._avatarElement.src,
         };
     }
 
-    setUserAvatar({link}) {
+    setUserAvatar({ link }) {
         this._avatarElement.src = link;
     }
 }

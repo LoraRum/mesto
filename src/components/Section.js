@@ -1,5 +1,5 @@
 class Section {
-    constructor({items, renderer}, containerSelector) {
+    constructor({ items, renderer }, containerSelector) {
         this.addItem = this.addItem.bind(this);
 
         this._items = items;

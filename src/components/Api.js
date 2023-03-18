@@ -13,7 +13,7 @@ class Api {
 
     updateUserInfo({ name, about }) {
         return fetch(`${this._baseUrl}/users/me`, {
-            method: 'PATCH',
+            method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({ name, about }),
         }).then(this._handleResponse);
@@ -21,7 +21,7 @@ class Api {
 
     editAvatar(data) {
         return fetch(`${this._baseUrl}/users/me/avatar`, {
-            method: 'PATCH',
+            method: "PATCH",
             headers: this._headers,
             body: JSON.stringify({
                 avatar: data.avatar,
@@ -29,36 +29,48 @@ class Api {
         }).then(this._handleResponse);
     }
 
-    addCard({ name, link}) {
+    addCard({ name, link }) {
         return fetch(`${this._baseUrl}/cards`, {
-            method: 'POST',
+            method: "POST",
             headers: this._headers,
-            body: JSON.stringify({ name , link}),
+            body: JSON.stringify({ name, link }),
         }).then(this._handleResponse);
     }
 
     getUserInfo() {
         return fetch(`${this._baseUrl}/users/me`, {
-            method: 'GET',
+            method: "GET",
             headers: this._headers,
         }).then(this._handleResponse);
     }
 
     getInitialCards() {
         return fetch(`${this._baseUrl}/cards`, {
-            method: 'GET',
+            method: "GET",
             headers: this._headers,
         }).then(this._handleResponse);
     }
 
     removeCard(cardId) {
         return fetch(`${this._baseUrl}/cards/${cardId}`, {
-            method: 'DELETE',
+            method: "DELETE",
             headers: this._headers,
         }).then((res) => this._handleResponse(res));
+    }
+
+    likeCard(cardId) {
+        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+            method: "PUT",
+            headers: this._headers,
+        }).then(this._handleResponse);
+    }
+
+    dislikeCard(cardId) {
+        return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+            method: "DELETE",
+            headers: this._headers,
+        }).then(this._handleResponse);
     }
 }
 
 export default Api;
-
-

@@ -1,5 +1,5 @@
 class UserInfo {
-    constructor({userNameSelector, aboutSelector}) {
+    constructor({ userNameSelector, aboutSelector }) {
         this._userNameElement = document.querySelector(userNameSelector);
         this._aboutElement = document.querySelector(aboutSelector);
     }
@@ -11,17 +11,18 @@ class UserInfo {
         };
     }
 
-    setUserInfo({username, about}) {
+    setUserInfo({ username, about }) {
         this._userNameElement.textContent = username;
         this._aboutElement.textContent = about;
     }
+
     getId() {
         return this._id;
     }
-    setId(id) {
-        this._id = id
-    }
 
+    setId(id) {
+        this._id = id;
+    }
 }
 
 export default UserInfo;
