@@ -6,7 +6,8 @@ class UserInfo {
 
     getUserInfo() {
         return {
-            username: this._userNameElement.textContent, about: this._aboutElement.textContent,
+            username: this._userNameElement.textContent,
+            about: this._aboutElement.textContent,
         };
     }
 
@@ -14,6 +15,13 @@ class UserInfo {
         this._userNameElement.textContent = username;
         this._aboutElement.textContent = about;
     }
+    getId() {
+        return this._id;
+    }
+    setId(id) {
+        this._id = id
+    }
+
 }
 
 export default UserInfo;

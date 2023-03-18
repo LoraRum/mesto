@@ -1,14 +1,16 @@
 class Card {
-    constructor(templateSelector, cardData, {onImageClick, onDeleteButtonClick}) {
+    constructor(templateSelector, cardData, {onImageClick, onDeleteButtonClick}, isOwnCard) {
         this._cardData = cardData;
         this._templateSelector = templateSelector;
         this._handleCardClick = onImageClick;
         this._handleDeleteButtonClick = onDeleteButtonClick;
+        this._isOwnCard = isOwnCard;
         this._cardElement = this._getTemplate();
         this._imageElement = this._cardElement.querySelector('.group__image');
         this._likeElement = this._cardElement.querySelector('.group__like');
         this._textElement = this._cardElement.querySelector('.group__text');
         this._likesElement = this._cardElement.querySelector('.group__like-sum');
+        this._buttonElement = this._cardElement.querySelector('.group__remove')
 
         this._populateTemplate();
         this._setEventListeners();
@@ -24,11 +26,15 @@ class Card {
         this._imageElement.src = this._cardData.link;
         this._imageElement.alt = this._cardData.name;
         this._likesElement.textContent = this._cardData.likes.length;
+
+        if (this._isOwnCard !== true) {
+            this._buttonElement.remove();
+        }
     }
 
     _handleRemove() {
         this._handleDeleteButtonClick();
-        //this._cardElement.remove();
+        this._cardElement.remove();
     }
 
     _handleLike() {
@@ -40,7 +46,7 @@ class Card {
     }
 
     _setEventListeners() {
-        this._cardElement.querySelector('.group__remove').addEventListener('click', this._handleRemove.bind(this));
+        this._buttonElement.addEventListener('click', this._handleRemove.bind(this));
         this._likeElement.addEventListener('click', this._handleLike.bind(this));
         this._imageElement.addEventListener('click', this._handlePopup.bind(this));
     }

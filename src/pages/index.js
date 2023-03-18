@@ -9,7 +9,7 @@ import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
 import UserAvatar from '../components/UserAvatar.js';
 import Api from '../components/Api.js';
-import Popup from '../components/Popup';
+import PopupConfirmation from '../components/PopupConfirmation';
 
 const userProfileButton = document.querySelector('.profile__edit-button');
 const newPlaceButton = document.querySelector('.profile__add-button');
@@ -77,7 +77,7 @@ const popupAvatarImage = new PopupWithForm('#popup-change-avatar', {
 });
 
 const popupFullScreen = new PopupWithImage('#popup-fullscreen');
-const popupDeleteConfirmation = new Popup('#popup-delete-card');
+const popupDeleteConfirmation = new PopupConfirmation('#popup-delete-card');
 
 const userInfo = new UserInfo({
     userNameSelector: '.profile__title', aboutSelector: '.profile__subtitle',
@@ -105,12 +105,18 @@ function createCard(cardData) {
     const handleImageCLick = popupFullScreen.open.bind(popupFullScreen,
         cardData,
     );
-    const handleDeleteButton = popupDeleteConfirmation.open;
+    const handleDeleteButton = () => {
+        popupDeleteConfirmation.setOnSubmit(() => {
+            api.removeCard(cardData._id)
+        });
 
-    const card = new Card('#card-template',
-        cardData,
-        {onImageClick: handleImageCLick, onDeleteButtonClick: handleDeleteButton},
-    );
+        popupDeleteConfirmation.open();
+    };
+
+    const isOwnCard = cardData.owner._id === userInfo.getId();
+    const card = new Card('#card-template', cardData, {
+        onImageClick: handleImageCLick, onDeleteButtonClick: handleDeleteButton,
+    }, isOwnCard);
     return card.render();
 }
 
@@ -129,19 +135,16 @@ api.getUserInfo()
     .then((result) => {
         userAvatar.setUserAvatar({link: result.avatar});
         userInfo.setUserInfo({username: result.name, about: result.about});
+        userInfo.setId(result._id);
+
+        //создание карточек
+        api.getInitialCards()
+            .then((result) => {
+                result.forEach((cardData) => {
+                    cardsSection.addItem(cardData);
+                });
+            });
     })
     .catch(err => {
         console.log(err);
     });
-
-//создание карточек
-api.getInitialCards()
-    .then((result) => {
-        result.forEach((cardData) => {
-            cardsSection.addItem(cardData);
-        });
-    });
-
-
-
-
