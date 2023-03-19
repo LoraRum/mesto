@@ -9,7 +9,7 @@ class UserAvatar {
         };
     }
 
-    setUserAvatar({ link }) {
+    setUserAvatar(link) {
         this._avatarElement.src = link;
     }
 }

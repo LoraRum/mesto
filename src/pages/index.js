@@ -21,6 +21,7 @@ const newPlaceForm = document.querySelector("#popup-new-place .form__form");
 const avatarImageForm = document.querySelector(
     "#popup-change-avatar .form__form"
 );
+
 const userNameInput = userProfileForm.querySelector("#username");
 const userAboutInput = userProfileForm.querySelector("#about");
 const avatarImageInput = avatarImageForm.querySelector("#avatar");
@@ -32,6 +33,7 @@ const userProfileFormValidator = new FormValidator(
     validationConfig
 );
 const newPlaceFormValidator = new FormValidator(newPlaceForm, validationConfig);
+const userAvatarFormValidator = new FormValidator(avatarImageForm, validationConfig)
 
 const api = new Api({
     baseUrl: "https://mesto.nomoreparties.co/v1/cohort-60",
@@ -59,6 +61,7 @@ const popupUserProfile = new PopupWithForm("#popup-user-profile", {
         const { about, username } = userInfo.getUserInfo();
         userNameInput.value = username;
         userAboutInput.value = about;
+        userProfileFormValidator.checkSubmitButton();
     },
 });
 const popupNewPlace = new PopupWithForm("#popup-new-place", {
@@ -73,16 +76,17 @@ const popupNewPlace = new PopupWithForm("#popup-new-place", {
 });
 const popupAvatarImage = new PopupWithForm("#popup-change-avatar", {
     onSubmit: (inputValues) => {
-        api.editAvatar({
+        return  api.editAvatar({
             avatar: inputValues.avatar,
         }).then((data) => {
-            userAvatar.getUserAvatar(data);
+            userAvatar.setUserAvatar(data.avatar);
             popupAvatarImage.close();
         });
     },
     onOpen: () => {
         const { link } = userAvatar.getUserAvatar();
         avatarImageInput.value = link;
+        userAvatarFormValidator.checkSubmitButton();
     },
 });
 
@@ -110,6 +114,8 @@ avatarImageButton.addEventListener("click", popupAvatarImage.open);
 
 userProfileFormValidator.enableValidation();
 newPlaceFormValidator.enableValidation();
+userAvatarFormValidator.enableValidation();
+
 popupUserProfile.setEventListeners();
 popupNewPlace.setEventListeners();
 popupFullScreen.setEventListeners();
@@ -129,7 +135,7 @@ function createCard(cardData) {
 }
 
 api.getUserInfo().then((result) => {
-    userAvatar.setUserAvatar({ link: result.avatar });
+    userAvatar.setUserAvatar(result.avatar);
     userInfo.setUserInfo({ username: result.name, about: result.about });
     userInfo.setId(result._id);
 

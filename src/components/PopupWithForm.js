@@ -7,6 +7,7 @@ class PopupWithForm extends Popup {
         this._onOpen = onOpen;
         this._form = this._popupElement.querySelector(".form__form");
         this._inputList = this._form.querySelectorAll('input');
+        this._buttonSave = this._form.querySelector(".form__save");
         this._handleSubmit = this._handleSubmit.bind(this);
     }
 
@@ -26,8 +27,11 @@ class PopupWithForm extends Popup {
     _handleSubmit(evt) {
         evt.preventDefault();
         const inputValues = this._getInputValues();
-        this._onSubmit(inputValues);
-        this.close();
+        this._buttonSave.textContent = "Сохранение...";
+        this._onSubmit(inputValues).then(() => {
+            this._buttonSave.textContent = "Сохранить";
+            this.close();
+        });
     }
 
     open() {

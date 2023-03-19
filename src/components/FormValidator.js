@@ -57,6 +57,10 @@ class FormValidator {
         this._buttonElement.disabled = true;
     }
 
+    checkSubmitButton() {
+        this._toggleButtonState();
+    }
+
     enableValidation() {
         this._setEventListeners();
     }

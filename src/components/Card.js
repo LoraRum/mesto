@@ -62,7 +62,7 @@ class Card {
         if (this._hasOwnLike()) {
             this._api.dislikeCard(this._cardData._id).then((cardData) => {
                 this._setCardData(cardData);
-            });
+            }).catch(console.log);
         } else {
             this._api.likeCard(this._cardData._id).then((cardData) => {
                 this._setCardData(cardData);
