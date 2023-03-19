@@ -45,7 +45,7 @@ const api = new Api({
 
 const popupUserProfile = new PopupWithForm("#popup-user-profile", {
     onSubmit: (data) => {
-        api.updateUserInfo({
+        return api.updateUserInfo({
             name: data.username,
             about: data.about,
         }).then((res) => {
@@ -66,7 +66,7 @@ const popupUserProfile = new PopupWithForm("#popup-user-profile", {
 });
 const popupNewPlace = new PopupWithForm("#popup-new-place", {
     onSubmit: (data) => {
-        api.addCard(data).then((cardData) => {
+        return api.addCard(data).then((cardData) => {
             cardsSection.addItem(cardData);
         });
     },
