@@ -12,27 +12,13 @@ class PopupConfirmation extends Popup {
         this._form.addEventListener("submit", this._handleSubmit);
     }
 
-    _handleSubmit(evt) {
-        evt.preventDefault();
-
-        if (typeof this._onSubmit === "function") {
-            this._onSubmit();
-        }
-
-        this.close();
-    }
-
     async _handleSubmit(evt) {
         evt.preventDefault();
 
         if (typeof this._onSubmit === "function") {
-            const response = await fetch;
-            if (response.ok) {
-                this._onSubmit();
+            const response = await this._onSubmit();
+            if (response && response.status === 200) {
                 this.close();
-            } else {
-                const errorData = await response.json();
-                console.error(errorData.error);
             }
         }
     }
@@ -43,6 +29,7 @@ class PopupConfirmation extends Popup {
 
     open() {
         super.open();
+
         if (typeof this._onOpen === "function") {
             this._onOpen();
         }

@@ -43,7 +43,10 @@ const api = new Api({
 });
 
 const popupUserProfile = new PopupWithForm("#popup-user-profile", {
-    onSubmit: (data) => {
+    onSubmit: (data, buttonSave) => {
+        if (buttonSave) {
+            buttonSave.textContent = "Сохранение...";
+        }
         return api.updateUserInfo({
             name: data.username,
             about: data.about,
@@ -53,6 +56,12 @@ const popupUserProfile = new PopupWithForm("#popup-user-profile", {
                 about: res.about,
             });
             popupUserProfile.close();
+        }).catch((err) => {
+            console.error(`Error updating user info: ${err}`);
+        }).finally(() => {
+            if (buttonSave) {
+                buttonSave.textContent = "Сохранить";
+            }
         });
     },
     onOpen: () => {
@@ -64,32 +73,52 @@ const popupUserProfile = new PopupWithForm("#popup-user-profile", {
     },
 });
 const popupNewPlace = new PopupWithForm("#popup-new-place", {
-    onSubmit: (data) => {
+    onSubmit: (data, buttonSave) => {
+        if (buttonSave) {
+            buttonSave.textContent = "Сохранение...";
+        }
         return api.addCard(data).then((cardData) => {
             cardsSection.addItem(cardData);
-        });
+        })
+            .catch((err) => {
+                console.error(`Error adding new card: ${err}`);
+            }).finally(() => {
+                if (buttonSave) {
+                    buttonSave.textContent = "Создать";
+                }
+            });
     },
     onOpen: () => {
         newPlaceFormValidator.disableSubmitButton();
     },
 });
+
 const popupAvatarImage = new PopupWithForm("#popup-change-avatar", {
-    onSubmit: (inputValues) => {
+        onSubmit: (data, buttonSave) => {
+            if (buttonSave) {
+                buttonSave.textContent = "Сохранение...";
+            }
         return  api.editAvatar({
-            avatar: inputValues.avatar,
+            avatar: data.avatar,
         }).then((data) => {
-            userInfo.setUserInfo(data.avatar);
+            userInfo.getAvatar(data.avatar);
             popupAvatarImage.close();
-        });
+        })
+            .catch((err) => {
+                console.error(`Error updating avatar: ${err}`);
+            }).finally(() => {
+                    if (buttonSave) {
+                        buttonSave.textContent = "Сохранить";
+                    }
+            });
     },
     onOpen: () => {
-        const { link } = userInfo.getUserInfo();
+        userAvatarFormValidator.disableSubmitButton();
+        const {} = userInfo.getAvatar();
         avatarImageInput.value = "";
         userAvatarFormValidator.checkSubmitButton();
     },
 });
-
-
 
 const popupFullScreen = new PopupWithImage("#popup-fullscreen");
 const popupDeleteConfirmation = new PopupConfirmation("#popup-delete-card");
@@ -97,8 +126,25 @@ const popupDeleteConfirmation = new PopupConfirmation("#popup-delete-card");
 const userInfo = new UserInfo({
     userNameSelector: ".profile__title",
     aboutSelector: ".profile__subtitle",
-    avatarSelector: ".avatar__image"
+    avatarSelector: ".avatar__image",
 });
+
+Promise.all([
+    api.getUserInfo(),
+    api.getInitialCards()
+])
+    .then(([user, cards]) => {
+        userInfo.setUserInfo({ username: user.name, about: user.about });
+        userInfo.setAvatar({ avatar: user.avatar });
+        userInfo.setId(user._id);
+
+        cards.forEach((cardData) => {
+            cardsSection.addItem(cardData);
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
 
 const cardsSection = new Section(
     {
@@ -124,6 +170,8 @@ popupFullScreen.setEventListeners();
 popupAvatarImage.setEventListeners();
 popupDeleteConfirmation.setEventListeners();
 
+
+
 function createCard(cardData) {
     const card = new Card(
         "#card-template",
@@ -136,13 +184,4 @@ function createCard(cardData) {
     return card.render();
 }
 
-api.getUserInfo().then((result) => {
-    userInfo.setUserInfo({ username: result.name, about: result.about, avatarLink : result.avatar});
-    userInfo.setId(result._id);
 
-    api.getInitialCards().then((result) => {
-        result.forEach((cardData) => {
-            cardsSection.addItem(cardData);
-        });
-    });
-});

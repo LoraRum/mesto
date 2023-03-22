@@ -76,7 +76,6 @@ class Card {
             return like._id === userId;
         });
     }
-
     _handlePopup() {
         this._popupFullScreen.open(this._cardData);
     }
