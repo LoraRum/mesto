@@ -7,7 +7,6 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import UserInfo from "../components/UserInfo.js";
-import UserAvatar from "../components/UserAvatar.js";
 import Api from "../components/Api.js";
 import PopupConfirmation from "../components/PopupConfirmation";
 
@@ -26,7 +25,7 @@ const userNameInput = userProfileForm.querySelector("#username");
 const userAboutInput = userProfileForm.querySelector("#about");
 const avatarImageInput = avatarImageForm.querySelector("#avatar");
 
-const userAvatar = new UserAvatar({ avatarSelector: ".avatar__image" });
+
 
 const userProfileFormValidator = new FormValidator(
     userProfileForm,
@@ -79,16 +78,18 @@ const popupAvatarImage = new PopupWithForm("#popup-change-avatar", {
         return  api.editAvatar({
             avatar: inputValues.avatar,
         }).then((data) => {
-            userAvatar.setUserAvatar(data.avatar);
+            userInfo.setUserInfo(data.avatar);
             popupAvatarImage.close();
         });
     },
     onOpen: () => {
-        const { link } = userAvatar.getUserAvatar();
-        avatarImageInput.value = link;
+        const { link } = userInfo.getUserInfo();
+        avatarImageInput.value = "";
         userAvatarFormValidator.checkSubmitButton();
     },
 });
+
+
 
 const popupFullScreen = new PopupWithImage("#popup-fullscreen");
 const popupDeleteConfirmation = new PopupConfirmation("#popup-delete-card");
@@ -96,6 +97,7 @@ const popupDeleteConfirmation = new PopupConfirmation("#popup-delete-card");
 const userInfo = new UserInfo({
     userNameSelector: ".profile__title",
     aboutSelector: ".profile__subtitle",
+    avatarSelector: ".avatar__image"
 });
 
 const cardsSection = new Section(
@@ -135,8 +137,7 @@ function createCard(cardData) {
 }
 
 api.getUserInfo().then((result) => {
-    userAvatar.setUserAvatar(result.avatar);
-    userInfo.setUserInfo({ username: result.name, about: result.about });
+    userInfo.setUserInfo({ username: result.name, about: result.about, avatarLink : result.avatar});
     userInfo.setId(result._id);
 
     api.getInitialCards().then((result) => {

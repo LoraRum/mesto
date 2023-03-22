@@ -22,6 +22,21 @@ class PopupConfirmation extends Popup {
         this.close();
     }
 
+    async _handleSubmit(evt) {
+        evt.preventDefault();
+
+        if (typeof this._onSubmit === "function") {
+            const response = await fetch;
+            if (response.ok) {
+                this._onSubmit();
+                this.close();
+            } else {
+                const errorData = await response.json();
+                console.error(errorData.error);
+            }
+        }
+    }
+
     setOnSubmit(onSubmit) {
         this._onSubmit = onSubmit;
     }
