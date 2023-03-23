@@ -26,7 +26,6 @@ const userAboutInput = userProfileForm.querySelector("#about");
 const avatarImageInput = avatarImageForm.querySelector("#avatar");
 
 
-
 const userProfileFormValidator = new FormValidator(
     userProfileForm,
     validationConfig
@@ -128,6 +127,8 @@ const userInfo = new UserInfo({
     aboutSelector: ".profile__subtitle",
     avatarSelector: ".avatar__image",
 });
+
+const userid = userInfo.getId();
 
 Promise.all([
     api.getUserInfo(),

@@ -2,13 +2,13 @@ class Card {
     constructor(
         templateSelector,
         cardData,
-        userInfo,
+        userid,
         api,
         popupFullScreen,
         popupDeleteConfirmation
     ) {
         this._templateSelector = templateSelector;
-        this._userInfo = userInfo;
+        this._userid = userid;
         this._api = api;
         this._popupFullScreen = popupFullScreen;
         this._popupDeleteConfirmation = popupDeleteConfirmation;
@@ -35,7 +35,7 @@ class Card {
         this._imageElement.alt = this._cardData.name;
         this._likesElement.textContent = this._cardData.likes.length;
 
-        const userId = this._userInfo.getId();
+        const userId = this._userid.getId();
 
         if (this._hasOwnLike()) {
             this._likeElement.classList.add("group__like_active");
@@ -71,7 +71,7 @@ class Card {
     }
 
     _hasOwnLike() {
-        const userId = this._userInfo.getId();
+        const userId = this._userid.getId();
         return this._cardData.likes.some((like) => {
             return like._id === userId;
         });
