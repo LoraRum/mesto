@@ -2,16 +2,18 @@ class Card {
     constructor(
         templateSelector,
         cardData,
-        userid,
-        api,
+        userId,
+        {onLike, onDelete},
         popupFullScreen,
-        popupDeleteConfirmation
+        popupDeleteConfirmation,
+
     ) {
         this._templateSelector = templateSelector;
-        this._userid = userid;
-        this._api = api;
+        this._userId = userId;
         this._popupFullScreen = popupFullScreen;
         this._popupDeleteConfirmation = popupDeleteConfirmation;
+        this.onLike = onLike;
+        this.onDelete = onDelete;
         this._cardElement = this._getTemplate();
         this._imageElement = this._cardElement.querySelector(".group__image");
         this._likeElement = this._cardElement.querySelector(".group__like");
@@ -20,7 +22,7 @@ class Card {
             this._cardElement.querySelector(".group__like-sum");
         this._buttonElement = this._cardElement.querySelector(".group__remove");
 
-        this._setCardData(cardData);
+        this.setCardData(cardData);
         this._setEventListeners();
     }
 
@@ -28,14 +30,14 @@ class Card {
         return this._cardElement;
     }
 
-    _setCardData(cardData) {
+    setCardData(cardData) {
         this._cardData = cardData;
         this._textElement.textContent = this._cardData.name;
         this._imageElement.src = this._cardData.link;
         this._imageElement.alt = this._cardData.name;
         this._likesElement.textContent = this._cardData.likes.length;
 
-        const userId = this._userid.getId();
+        const userId = this._userId.getId();
 
         if (this._hasOwnLike()) {
             this._likeElement.classList.add("group__like_active");
@@ -50,28 +52,24 @@ class Card {
 
     _handleRemove() {
         this._popupDeleteConfirmation.setOnSubmit(() => {
-            this._api
-                .removeCard(this._cardData._id)
-                .then(() => this._cardElement.remove())
-                .catch((err) => console.log(err));
+            this.onDelete(this._cardData._id);
+            this._cardElement.remove();
         });
         this._popupDeleteConfirmation.open();
     }
 
     _handleLike() {
         if (this._hasOwnLike()) {
-            this._api.dislikeCard(this._cardData._id).then((cardData) => {
-                this._setCardData(cardData);
-            }).catch(console.log);
+            this.onLike(false, this._cardData._id);
+            this.setCardData(this._cardData);
         } else {
-            this._api.likeCard(this._cardData._id).then((cardData) => {
-                this._setCardData(cardData);
-            });
+            this.onLike(true, this._cardData._id);
+            this.setCardData(this._cardData);
         }
     }
 
     _hasOwnLike() {
-        const userId = this._userid.getId();
+        const userId = this._userId.getId();
         return this._cardData.likes.some((like) => {
             return like._id === userId;
         });

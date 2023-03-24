@@ -10,6 +10,7 @@ import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
 import PopupConfirmation from "../components/PopupConfirmation";
 
+
 const userProfileButton = document.querySelector(".profile__edit-button");
 const newPlaceButton = document.querySelector(".profile__add-button");
 const avatarImageButton = document.querySelector(".avatar");
@@ -101,6 +102,7 @@ const popupAvatarImage = new PopupWithForm("#popup-change-avatar", {
             avatar: data.avatar,
         }).then((data) => {
             userInfo.getAvatar(data.avatar);
+            userInfo.setAvatar(data.avatar);
             popupAvatarImage.close();
         })
             .catch((err) => {
@@ -128,7 +130,7 @@ const userInfo = new UserInfo({
     avatarSelector: ".avatar__image",
 });
 
-const userid = userInfo.getId();
+const userId = userInfo.getId();
 
 Promise.all([
     api.getUserInfo(),
@@ -172,17 +174,39 @@ popupAvatarImage.setEventListeners();
 popupDeleteConfirmation.setEventListeners();
 
 
+function onDeleteCard (cardId) {
+    api.removeCard(cardId)
+        .then(() => {
+            console.log("Card removed successfully");
+        })
+        .catch((err) => {
+            console.error(`Error removing card: ${err}`);
+        })
+}
 
 function createCard(cardData) {
     const card = new Card(
         "#card-template",
         cardData,
         userInfo,
-        api,
+        { onDelete: onDeleteCard, onLike: onLikeCard },
         popupFullScreen,
         popupDeleteConfirmation
     );
+    function onLikeCard (isLiked, cardId) {
+        const apiCall = isLiked ? api.likeCard(cardId) : api.dislikeCard(cardId);
+        apiCall
+            .then((A) => {
+                console.log(`Card ${isLiked ? "liked" : "disliked"} successfully`);
+                card.setCardData(A);
+            })
+            .catch((err) => {
+                console.error(err);
+            })
+    }
     return card.render();
 }
+
+
 
 
