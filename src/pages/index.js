@@ -72,6 +72,36 @@ const popupUserProfile = new PopupWithForm("#popup-user-profile", {
         userProfileFormValidator.checkSubmitButton();
     },
 });
+
+const popupAvatarImage = new PopupWithForm("#popup-change-avatar", {
+    onSubmit: (data, buttonSave) => {
+        if (buttonSave) {
+            buttonSave.textContent = "Сохранение...";
+        }
+        return  api.editAvatar({
+            avatar: data.avatar,
+        }).then((data) => {
+            userInfo.setAvatar(data.avatar);
+            popupAvatarImage.close();
+        })
+            .catch((err) => {
+                console.error(`Error updating avatar: ${err}`);
+            }).finally(() => {
+                if (buttonSave) {
+                    buttonSave.textContent = "Сохранить";
+                }
+            });
+    },
+    onOpen: () => {
+        userAvatarFormValidator.checkSubmitButton();
+        userAvatarFormValidator.disableSubmitButton();
+        const {} = userInfo.getAvatar();
+        avatarImageInput.value = "";
+
+    },
+});
+
+
 const popupNewPlace = new PopupWithForm("#popup-new-place", {
     onSubmit: (data, buttonSave) => {
         if (buttonSave) {
@@ -93,33 +123,7 @@ const popupNewPlace = new PopupWithForm("#popup-new-place", {
     },
 });
 
-const popupAvatarImage = new PopupWithForm("#popup-change-avatar", {
-        onSubmit: (data, buttonSave) => {
-            if (buttonSave) {
-                buttonSave.textContent = "Сохранение...";
-            }
-        return  api.editAvatar({
-            avatar: data.avatar,
-        }).then((data) => {
-            userInfo.getAvatar(data.avatar);
-            userInfo.setAvatar(data.avatar);
-            popupAvatarImage.close();
-        })
-            .catch((err) => {
-                console.error(`Error updating avatar: ${err}`);
-            }).finally(() => {
-                    if (buttonSave) {
-                        buttonSave.textContent = "Сохранить";
-                    }
-            });
-    },
-    onOpen: () => {
-        userAvatarFormValidator.disableSubmitButton();
-        const {} = userInfo.getAvatar();
-        avatarImageInput.value = "";
-        userAvatarFormValidator.checkSubmitButton();
-    },
-});
+
 
 const popupFullScreen = new PopupWithImage("#popup-fullscreen");
 const popupDeleteConfirmation = new PopupConfirmation("#popup-delete-card");
@@ -130,7 +134,6 @@ const userInfo = new UserInfo({
     avatarSelector: ".avatar__image",
 });
 
-const userId = userInfo.getId();
 
 Promise.all([
     api.getUserInfo(),
@@ -177,6 +180,7 @@ popupDeleteConfirmation.setEventListeners();
 function onDeleteCard (cardId) {
     api.removeCard(cardId)
         .then(() => {
+            popupDeleteConfirmation.close();
             console.log("Card removed successfully");
         })
         .catch((err) => {
@@ -188,7 +192,7 @@ function createCard(cardData) {
     const card = new Card(
         "#card-template",
         cardData,
-        userInfo,
+        userInfo.getId(),
         { onDelete: onDeleteCard, onLike: onLikeCard },
         popupFullScreen,
         popupDeleteConfirmation

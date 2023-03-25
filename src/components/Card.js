@@ -37,7 +37,6 @@ class Card {
         this._imageElement.alt = this._cardData.name;
         this._likesElement.textContent = this._cardData.likes.length;
 
-        const userId = this._userId.getId();
 
         if (this._hasOwnLike()) {
             this._likeElement.classList.add("group__like_active");
@@ -45,7 +44,7 @@ class Card {
             this._likeElement.classList.remove("group__like_active");
         }
 
-        if (userId !== this._cardData.owner._id) {
+        if (this._userId  !== this._cardData.owner._id) {
             this._buttonElement.remove();
         }
     }
@@ -69,7 +68,7 @@ class Card {
     }
 
     _hasOwnLike() {
-        const userId = this._userId.getId();
+        const userId = this._userId;
         return this._cardData.likes.some((like) => {
             return like._id === userId;
         });
