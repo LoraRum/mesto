@@ -1,6 +1,5 @@
-.group__remove {
-    all: unset;
-    background-image: url(../../../src/images/Group.svg);
+.profile__edit-button {
+    background-image: url(../../../images/Edit-Button.svg);
     outline: none;
     display: inline-block;
     text-align: center;
@@ -10,13 +9,17 @@
     background-repeat: no-repeat;
     background-size: cover;
     width: 18px;
-    height: 19.3px;
+    height: 18px;
     cursor: pointer;
-    position: absolute;
-    top: 20px;
-    right: 20px;
 }
 
-.group__remove:hover {
+.profile__edit-button:hover {
     opacity: 0.6;
+}
+
+@media screen and (min-width: 1024px) {
+    .profile__edit-button {
+        width: 24px;
+        height: 24px;
+    }
 }

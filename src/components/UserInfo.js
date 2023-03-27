@@ -15,15 +15,15 @@ class UserInfo {
     getAvatar() {
         return {
             avatar: this._avatarElement.src,
-        }
+        };
     }
 
-    setUserInfo({ username, about}) {
+    setUserInfo({ username, about }) {
         this._userNameElement.textContent = username;
         this._aboutElement.textContent = about;
     }
 
-    setAvatar ({avatar}) {
+    setAvatar(avatar) {
         this._avatarElement.src = avatar;
     }
 

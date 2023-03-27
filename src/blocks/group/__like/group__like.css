@@ -1,6 +1,6 @@
 .group__like {
     all: unset;
-    background-image: url(../../../src/images/like.svg);
+    background-image: url(../../../images/like.svg);
     text-decoration: none;
     background-color: transparent;
     background-repeat: no-repeat;

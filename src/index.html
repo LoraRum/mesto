@@ -16,7 +16,7 @@
     <main>
         <section class="profile">
             <div class="profile__about">
-                <button class="avatar" type="button" aria-label="обновить аватар">
+                <button aria-label="обновить аватар" class="avatar" type="button">
                     <img alt="Аватар" class="avatar__image">
                     <div class="avatar__dark"></div>
                     <img alt="Изменить аватар" class="avatar__pencil" src="<%=require('./images/change.svg')%>">
@@ -48,7 +48,8 @@
                     <h2 class="form__title">Обновить аватар</h2>
                     <form class="form__form" novalidate>
                         <fieldset class="form__user-info">
-                            <input class="input input_type_link" id="avatar" name="avatar" placeholder="Введите ссылку на аватар"
+                            <input class="input input_type_link" id="avatar" name="avatar"
+                                   placeholder="Введите ссылку на аватар"
                                    required type="url">
                             <span class="avatar-error popup__input-error"></span>
                         </fieldset>

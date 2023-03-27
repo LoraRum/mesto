@@ -16,10 +16,7 @@ class PopupConfirmation extends Popup {
         evt.preventDefault();
 
         if (typeof this._onSubmit === "function") {
-            const response = await this._onSubmit();
-            if (response && response.status === 200) {
-                this.close();
-            }
+            this._onSubmit();
         }
     }
 

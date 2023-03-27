@@ -3,10 +3,9 @@ class Card {
         templateSelector,
         cardData,
         userId,
-        {onLike, onDelete},
+        { onLike, onDelete },
         popupFullScreen,
-        popupDeleteConfirmation,
-
+        popupDeleteConfirmation
     ) {
         this._templateSelector = templateSelector;
         this._userId = userId;
@@ -37,22 +36,24 @@ class Card {
         this._imageElement.alt = this._cardData.name;
         this._likesElement.textContent = this._cardData.likes.length;
 
-
         if (this._hasOwnLike()) {
             this._likeElement.classList.add("group__like_active");
         } else {
             this._likeElement.classList.remove("group__like_active");
         }
 
-        if (this._userId  !== this._cardData.owner._id) {
+        if (this._userId !== this._cardData.owner._id) {
             this._buttonElement.remove();
         }
+    }
+
+    delete() {
+        this._cardElement.remove();
     }
 
     _handleRemove() {
         this._popupDeleteConfirmation.setOnSubmit(() => {
             this.onDelete(this._cardData._id);
-            this._cardElement.remove();
         });
         this._popupDeleteConfirmation.open();
     }
@@ -60,10 +61,8 @@ class Card {
     _handleLike() {
         if (this._hasOwnLike()) {
             this.onLike(false, this._cardData._id);
-            this.setCardData(this._cardData);
         } else {
             this.onLike(true, this._cardData._id);
-            this.setCardData(this._cardData);
         }
     }
 
@@ -73,6 +72,7 @@ class Card {
             return like._id === userId;
         });
     }
+
     _handlePopup() {
         this._popupFullScreen.open(this._cardData);
     }
